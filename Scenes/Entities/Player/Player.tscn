@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_0mpj3"]
 [ext_resource type="Texture2D" uid="uid://bflo6ksu58eli" path="res://Sprites/Player/player1.png" id="2_y0jmv"]
-[ext_resource type="PackedScene" uid="uid://w7jh73mivvd4" path="res://Scenes/Gun.tscn" id="3_xfd15"]
+[ext_resource type="PackedScene" uid="uid://w7jh73mivvd4" path="res://Scenes/Entities/Player/Gun/Gun.tscn" id="3_xfd15"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s2rt8"]
 radius = 4.0

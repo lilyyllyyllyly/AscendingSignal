@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://gs2jlmggvj4j"]
+
+[ext_resource type="Script" path="res://Scripts/GameManager.cs" id="1_hq04o"]
+[ext_resource type="PackedScene" uid="uid://140pyjbhucgw" path="res://Scenes/Entities/Bird.tscn" id="2_o3rcn"]
+[ext_resource type="PackedScene" uid="uid://cvqngf3u5s5yd" path="res://Scenes/Entities/Player/Player.tscn" id="3_26y4g"]
+[ext_resource type="PackedScene" uid="uid://b84et206spagb" path="res://Scenes/Entities/Balloon.tscn" id="4_3w46a"]
+[ext_resource type="Texture2D" uid="uid://434ljf1hjx1s" path="res://Sprites/bg.png" id="5_46cya"]
+
+[node name="Main" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("balloons")]
+script = ExtResource("1_hq04o")
+balloons = [NodePath("../Balloon/Balloon"), NodePath("../Balloon2/Balloon"), NodePath("../Balloon3/Balloon")]
+bird = ExtResource("2_o3rcn")
+birdSpawnArea = Rect2(0, -20, 1024, 0)
+birdSpawnDelay = 5000.0
+
+[node name="Player" parent="." instance=ExtResource("3_26y4g")]
+position = Vector2(202, 146)
+
+[node name="Balloon" parent="." instance=ExtResource("4_3w46a")]
+position = Vector2(200, 170)
+
+[node name="Balloon2" parent="." instance=ExtResource("4_3w46a")]
+position = Vector2(80, 190)
+
+[node name="Balloon3" parent="." instance=ExtResource("4_3w46a")]
+position = Vector2(320, 190)
+
+[node name="Bg" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.572549)
+z_index = -50
+texture = ExtResource("5_46cya")
+centered = false
+
+[editable path="Balloon"]
+[editable path="Balloon2"]
+[editable path="Balloon3"]
