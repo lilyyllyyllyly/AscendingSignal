@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://gs2jlmggvj4j"]
+[gd_scene load_steps=5 format=3 uid="uid://gs2jlmggvj4j"]
 
 [ext_resource type="Texture2D" uid="uid://dpq0gyfl2w8lv" path="res://icon.svg" id="1_7qcxl"]
 [ext_resource type="PackedScene" uid="uid://cvqngf3u5s5yd" path="res://Scenes/Player.tscn" id="2_aw4qe"]
+[ext_resource type="PackedScene" uid="uid://140pyjbhucgw" path="res://Scenes/Bird.tscn" id="3_m2wlb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_65m02"]
 size = Vector2(32, 32)
@@ -40,3 +41,7 @@ texture = ExtResource("1_7qcxl")
 
 [node name="Player" parent="." instance=ExtResource("2_aw4qe")]
 position = Vector2(567, 314)
+
+[node name="Bird" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_m2wlb")]
+position = Vector2(334, 147)
+target = NodePath("../StaticBody2D")
