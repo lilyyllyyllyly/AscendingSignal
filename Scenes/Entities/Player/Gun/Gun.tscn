@@ -8,7 +8,7 @@
 script = ExtResource("1_qyrho")
 projectile = ExtResource("2_l8e27")
 spawnPoint = NodePath("Muzzle")
-shootDelay = 350.0
+shootDelay = 500.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -5

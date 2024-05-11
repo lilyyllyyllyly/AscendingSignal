@@ -9,8 +9,8 @@ height = 6.0
 
 [node name="Projectile" type="Node2D"]
 script = ExtResource("1_23bhs")
-speed = 300.0
-lifetime = 0.4
+speed = 250.0
+lifetime = 0.35
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
