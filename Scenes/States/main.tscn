@@ -1,22 +1,97 @@
-[gd_scene load_steps=6 format=3 uid="uid://gs2jlmggvj4j"]
+[gd_scene load_steps=9 format=3 uid="uid://gs2jlmggvj4j"]
 
+[ext_resource type="FontFile" uid="uid://dsfiogj66lwmu" path="res://Sprites/Fonts/Poco.ttf" id="1_7xh8f"]
 [ext_resource type="Script" path="res://Scripts/GameManager.cs" id="1_hq04o"]
+[ext_resource type="Script" path="res://Scripts/Camera.cs" id="1_r2bng"]
 [ext_resource type="PackedScene" uid="uid://140pyjbhucgw" path="res://Scenes/Entities/Bird.tscn" id="2_o3rcn"]
 [ext_resource type="PackedScene" uid="uid://cvqngf3u5s5yd" path="res://Scenes/Entities/Player/Player.tscn" id="3_26y4g"]
 [ext_resource type="PackedScene" uid="uid://b84et206spagb" path="res://Scenes/Entities/Balloon.tscn" id="4_3w46a"]
 [ext_resource type="Texture2D" uid="uid://434ljf1hjx1s" path="res://Sprites/bg.png" id="5_46cya"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_ml17w"]
+font = ExtResource("1_7xh8f")
+font_size = 20
+
 [node name="Main" type="Node2D"]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("balloons")]
+[node name="Cam" type="Camera2D" parent="."]
+anchor_mode = 0
+script = ExtResource("1_r2bng")
+
+[node name="UIView" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="UIView"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="SignalHeader" type="Label" parent="UIView/UI"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = -1.0
+offset_right = 54.0
+offset_bottom = 23.0
+text = "Signal"
+label_settings = SubResource("LabelSettings_ml17w")
+
+[node name="BarOne" type="ColorRect" parent="UIView/UI"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 5.0
+offset_right = 62.0
+offset_bottom = 28.0
+color = Color(0.442911, 0.442911, 0.442911, 1)
+
+[node name="BarTwo" type="ColorRect" parent="UIView/UI"]
+offset_left = 64.0
+offset_top = 5.0
+offset_right = 68.0
+offset_bottom = 28.0
+color = Color(0.442911, 0.442911, 0.442911, 1)
+
+[node name="BarThree" type="ColorRect" parent="UIView/UI"]
+offset_left = 70.0
+offset_top = 5.0
+offset_right = 74.0
+offset_bottom = 28.0
+color = Color(0.442911, 0.442911, 0.442911, 1)
+
+[node name="BarFour" type="ColorRect" parent="UIView/UI"]
+offset_left = 76.0
+offset_top = 5.0
+offset_right = 80.0
+offset_bottom = 28.0
+color = Color(0.442911, 0.442911, 0.442911, 1)
+
+[node name="BarFive" type="ColorRect" parent="UIView/UI"]
+offset_left = 82.0
+offset_top = 5.0
+offset_right = 86.0
+offset_bottom = 28.0
+color = Color(0.442911, 0.442911, 0.442911, 1)
+
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("spawnTimer", "balloons", "bars")]
 script = ExtResource("1_hq04o")
+spawnTimer = NodePath("SpawnTimer")
 balloons = [NodePath("../Balloon/Balloon"), NodePath("../Balloon2/Balloon"), NodePath("../Balloon3/Balloon")]
+bars = [NodePath("../UIView/UI/BarOne"), NodePath("../UIView/UI/BarTwo"), NodePath("../UIView/UI/BarThree"), NodePath("../UIView/UI/BarFour"), NodePath("../UIView/UI/BarFive")]
 bird = ExtResource("2_o3rcn")
-birdSpawnArea = Rect2(0, -20, 1024, 0)
-birdSpawnDelay = 5000.0
+birdSpawnArea = Rect2(0, -20, 400, 0)
+
+[node name="SpawnTimer" type="Timer" parent="GameManager"]
+wait_time = 4.0
+autostart = true
+
+[node name="Metres" type="Timer" parent="GameManager"]
+wait_time = 0.6
+autostart = true
 
 [node name="Player" parent="." instance=ExtResource("3_26y4g")]
-position = Vector2(202, 146)
+position = Vector2(202, 166)
 
 [node name="Balloon" parent="." instance=ExtResource("4_3w46a")]
 position = Vector2(200, 170)
@@ -32,6 +107,9 @@ modulate = Color(1, 1, 1, 0.572549)
 z_index = -50
 texture = ExtResource("5_46cya")
 centered = false
+
+[connection signal="timeout" from="GameManager/SpawnTimer" to="GameManager" method="SpawnBird"]
+[connection signal="timeout" from="GameManager/Metres" to="GameManager" method="OnMetreTravelled"]
 
 [editable path="Balloon"]
 [editable path="Balloon2"]
