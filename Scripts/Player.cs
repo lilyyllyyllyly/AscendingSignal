@@ -8,8 +8,8 @@ public partial class Player : CharacterBody2D
 	[Export] private float speed =  500;
 	[Export] private float accel = 1500;
 
-	[Export] private float jumpForce;
-	[Export] private float jumpHold;
+	[Export] private float jumpForce = -400;
+	[Export] private float jumpHold  =  100;
 	[Export] private int jumpsMax = 2;
 	private int jumpsLeft;
 	private float jumpStart = 0;
