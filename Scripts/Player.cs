@@ -15,12 +15,17 @@ public partial class Player : CharacterBody2D
 	private float jumpStart = 0;
 	private bool jumping = false;
 
+	[Export] private AnimationPlayer anim;
+
 	public override void _PhysicsProcess(double delta)
 	{
 		float now = Time.GetTicksMsec();
 
 		// Horizontal Movement
 		float direction = Input.GetAxis("left", "right");
+		if (direction != 0) anim.Play("walk");
+		else anim.Play("idle");
+
 		float goalVel = direction * speed;
 
 		float maxMove = accel;
@@ -35,6 +40,7 @@ public partial class Player : CharacterBody2D
 		float yMove = 0;
 		if (!IsOnFloor()) {
 			yMove = Velocity.Y + gravity * (float)delta;
+			anim.Play("jump");
 		} else {
 			jumpsLeft = jumpsMax;
 		}

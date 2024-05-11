@@ -15,6 +15,8 @@ public partial class Bird : CharacterBody2D
 	[Export] private float maxHealth = 3;
 	private float health;
 
+	[Export] private AnimationPlayer anim;
+
 	public void Hit()
 	{
 		if (--health <= 0) {
@@ -25,6 +27,7 @@ public partial class Bird : CharacterBody2D
 	public override void _Ready()
 	{
 		health = maxHealth;
+		anim.Play("fly");
 	}
 
 	public override void _PhysicsProcess(double delta)

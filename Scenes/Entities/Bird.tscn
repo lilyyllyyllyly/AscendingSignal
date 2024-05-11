@@ -1,15 +1,56 @@
-[gd_scene load_steps=5 format=3 uid="uid://140pyjbhucgw"]
+[gd_scene load_steps=11 format=3 uid="uid://140pyjbhucgw"]
 
 [ext_resource type="Script" path="res://Scripts/Bird.cs" id="1_kmd30"]
 [ext_resource type="Texture2D" uid="uid://ccn4jpshofwyh" path="res://Sprites/Bird/bird1.png" id="2_kbpwc"]
+[ext_resource type="Texture2D" uid="uid://vfplxv7poo5w" path="res://Sprites/Bird/bird2.png" id="3_ryuve"]
+[ext_resource type="Texture2D" uid="uid://hcxloilaoc1x" path="res://Sprites/Bird/bird3.png" id="4_l5gae"]
+[ext_resource type="Texture2D" uid="uid://os0fmttonq2r" path="res://Sprites/Bird/bird4.png" id="5_lqkec"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7xo2u"]
 radius = 8.0
 
+[sub_resource type="Animation" id="Animation_rywse"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_kbpwc")]
+}
+
+[sub_resource type="Animation" id="Animation_hqt2y"]
+resource_name = "fly"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_kbpwc"), ExtResource("3_ryuve"), ExtResource("4_l5gae"), ExtResource("5_lqkec")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_74ek4"]
+_data = {
+"RESET": SubResource("Animation_rywse"),
+"fly": SubResource("Animation_hqt2y")
+}
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_wfdd8"]
 radius = 8.0
 
-[node name="Bird" type="CharacterBody2D"]
+[node name="Bird" type="CharacterBody2D" node_paths=PackedStringArray("anim")]
 collision_layer = 4
 collision_mask = 0
 motion_mode = 1
@@ -17,6 +58,7 @@ script = ExtResource("1_kmd30")
 speed = 50.0
 accel = 100.0
 stopDist = 30.0
+anim = NodePath("AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 top_level = true
@@ -24,6 +66,11 @@ shape = SubResource("CircleShape2D_7xo2u")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_kbpwc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_74ek4")
+}
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
