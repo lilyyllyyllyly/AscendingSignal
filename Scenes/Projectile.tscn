@@ -1,24 +1,27 @@
 [gd_scene load_steps=4 format=3 uid="uid://g8ky2kuf0hot"]
 
 [ext_resource type="Script" path="res://Scripts/Projectile.cs" id="1_23bhs"]
-[ext_resource type="Texture2D" uid="uid://dpq0gyfl2w8lv" path="res://icon.svg" id="1_jq53o"]
+[ext_resource type="Texture2D" uid="uid://bikipgukrq7uo" path="res://Sprites/projectile.png" id="2_7ds4q"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_e6fas"]
-radius = 8.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qaabg"]
+radius = 2.0
+height = 6.0
 
 [node name="Projectile" type="Node2D"]
 script = ExtResource("1_23bhs")
-lifetime = 0.3
+speed = 300.0
+lifetime = 0.4
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_jq53o")
+texture = ExtResource("2_7ds4q")
+offset = Vector2(0, 2)
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_e6fas")
+shape = SubResource("CapsuleShape2D_qaabg")
 
 [connection signal="area_entered" from="Area2D" to="." method="queue_free" unbinds=1]

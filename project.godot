@@ -17,9 +17,10 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=1024
-window/size/viewport_height=640
+window/size/viewport_width=400
+window/size/viewport_height=225
 window/stretch/mode="viewport"
+window/canvas_textures/default_texture_filter=0
 
 [dotnet]
 
@@ -65,9 +66,11 @@ fire={
 
 [physics]
 
-2d/default_gravity=2000.0
+2d/default_gravity=1200.0
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.5782, 0.825977, 0.98, 1)
