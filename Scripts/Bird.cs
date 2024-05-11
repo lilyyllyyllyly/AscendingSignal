@@ -12,6 +12,21 @@ public partial class Bird : CharacterBody2D
 	[Export] private float attackTime = 1500;
 	private float lastAttack = 0;
 
+	[Export] private float maxHealth = 3;
+	private float health;
+
+	public void Hit()
+	{
+		if (--health <= 0) {
+			QueueFree();
+		}
+	}
+
+	public override void _Ready()
+	{
+		health = maxHealth;
+	}
+
 	public override void _PhysicsProcess(double delta)
 	{
 		if (!IsInstanceValid(target)) {
