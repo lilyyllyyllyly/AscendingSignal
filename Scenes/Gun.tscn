@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://w7jh73mivvd4"]
+
+[ext_resource type="Script" path="res://Scripts/Gun.cs" id="1_qyrho"]
+[ext_resource type="PackedScene" uid="uid://g8ky2kuf0hot" path="res://Scenes/Projectile.tscn" id="2_l8e27"]
+[ext_resource type="Texture2D" uid="uid://dpq0gyfl2w8lv" path="res://icon.svg" id="3_ng7la"]
+
+[node name="Gun" type="Node2D" node_paths=PackedStringArray("spawnPoint")]
+script = ExtResource("1_qyrho")
+projectile = ExtResource("2_l8e27")
+spawnPoint = NodePath("Muzzle")
+shootDelay = 200.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.7, 1)
+texture = ExtResource("3_ng7la")
+offset = Vector2(0, -16)
+
+[node name="Muzzle" type="Node2D" parent="."]
+position = Vector2(0, -32)
