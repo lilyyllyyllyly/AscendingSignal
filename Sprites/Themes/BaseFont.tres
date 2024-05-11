@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bv2lp334cqmwh"]
+
+[ext_resource type="FontFile" uid="uid://dsfiogj66lwmu" path="res://Sprites/Fonts/Poco.ttf" id="1_jnck7"]
+
+[resource]
+font = ExtResource("1_jnck7")
+font_size = 20

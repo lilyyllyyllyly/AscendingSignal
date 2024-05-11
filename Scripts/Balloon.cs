@@ -9,6 +9,8 @@ public partial class Balloon : Node2D
 	[Export] private AnimationPlayer anim;
 	[Export] private AnimationPlayer fireAnim;
 
+	[Export] private Label textHP;
+
 	public override void _Ready()
 	{
 		health = maxHealth;
@@ -22,6 +24,7 @@ public partial class Balloon : Node2D
 
 	public override void _Process(double delta)
 	{
+		textHP.Text = $"{health} HP";
 		if (health <= 0) {
 			GetNode("..").QueueFree();
 		}
