@@ -11,8 +11,6 @@ collision_layer = 4
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_kmd30")
-stopDist = 100.0
-attackTime = 1500.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 top_level = true

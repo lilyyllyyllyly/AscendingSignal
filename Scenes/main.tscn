@@ -1,47 +1,31 @@
 [gd_scene load_steps=5 format=3 uid="uid://gs2jlmggvj4j"]
 
-[ext_resource type="Texture2D" uid="uid://dpq0gyfl2w8lv" path="res://icon.svg" id="1_7qcxl"]
+[ext_resource type="Script" path="res://Scripts/GameManager.cs" id="1_2c1vi"]
 [ext_resource type="PackedScene" uid="uid://cvqngf3u5s5yd" path="res://Scenes/Player.tscn" id="2_aw4qe"]
+[ext_resource type="PackedScene" uid="uid://b84et206spagb" path="res://Scenes/Balloon.tscn" id="3_4aey6"]
 [ext_resource type="PackedScene" uid="uid://140pyjbhucgw" path="res://Scenes/Bird.tscn" id="3_m2wlb"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_65m02"]
-size = Vector2(32, 32)
 
 [node name="Main" type="Node2D"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(211, 530)
-scale = Vector2(9.33947, 2.7919)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("RectangleShape2D_65m02")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-texture = ExtResource("1_7qcxl")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(577, 450)
-scale = Vector2(9.33947, 2.7919)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-shape = SubResource("RectangleShape2D_65m02")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
-texture = ExtResource("1_7qcxl")
-
-[node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(944, 526)
-scale = Vector2(9.33947, 2.7919)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-shape = SubResource("RectangleShape2D_65m02")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
-texture = ExtResource("1_7qcxl")
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("balloons")]
+script = ExtResource("1_2c1vi")
+balloons = [NodePath("../Balloon/Balloon"), NodePath("../Balloon2/Balloon"), NodePath("../Balloon3/Balloon")]
 
 [node name="Player" parent="." instance=ExtResource("2_aw4qe")]
-position = Vector2(567, 314)
+position = Vector2(512, 391)
 
-[node name="Bird" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_m2wlb")]
-position = Vector2(334, 147)
-target = NodePath("../StaticBody2D")
+[node name="Bird" parent="." instance=ExtResource("3_m2wlb")]
+position = Vector2(319, 162)
+
+[node name="Balloon" parent="." instance=ExtResource("3_4aey6")]
+position = Vector2(520, 471)
+
+[node name="Balloon2" parent="." instance=ExtResource("3_4aey6")]
+position = Vector2(204, 557)
+
+[node name="Balloon3" parent="." instance=ExtResource("3_4aey6")]
+position = Vector2(841, 551)
+
+[editable path="Balloon"]
+[editable path="Balloon2"]
+[editable path="Balloon3"]

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://b84et206spagb"]
+
+[ext_resource type="Texture2D" uid="uid://dpq0gyfl2w8lv" path="res://icon.svg" id="1_tal4y"]
+[ext_resource type="Script" path="res://Scripts/Balloon.cs" id="2_17alc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o4f5q"]
+size = Vector2(160, 64)
+
+[node name="Balloon" type="Node2D"]
+
+[node name="Base" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Base"]
+shape = SubResource("RectangleShape2D_o4f5q")
+
+[node name="Sprite2D" type="Sprite2D" parent="Base"]
+scale = Vector2(5, 2)
+texture = ExtResource("1_tal4y")
+
+[node name="Balloon" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.607843)
+z_index = -10
+position = Vector2(0, -170)
+scale = Vector2(7, 7)
+texture = ExtResource("1_tal4y")
+script = ExtResource("2_17alc")
+maxHealth = 5.0

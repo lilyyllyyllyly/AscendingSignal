@@ -3,7 +3,7 @@ using System;
 
 public partial class Bird : CharacterBody2D
 {
-	[Export] private Node2D target;
+	[Export] private Balloon target;
 	[Export] private float speed = 100;
 	[Export] private float accel = 200;
 
@@ -14,13 +14,19 @@ public partial class Bird : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (!IsInstanceValid(target)) {
+			long r = GD.Randi() % GameManager.instance.balloons.Length;
+			target = GameManager.instance.balloons[r];
+			return;
+		}
+
 		float now = Time.GetTicksMsec();
-		inAttackArea = Position.DistanceTo(target.Position) <= stopDist;
+		inAttackArea = GlobalPosition.DistanceTo(target.GlobalPosition) <= stopDist;
 
 		// Moving
 		Vector2 direction;
 		if (!inAttackArea) {
-			direction = (target.Position - Position).Normalized();
+			direction = (target.GlobalPosition - GlobalPosition).Normalized();
 			lastAttack = now; // so it cant attack instantly when it enters area
 		} else {
 			direction = Vector2.Zero;
@@ -35,7 +41,7 @@ public partial class Bird : CharacterBody2D
 		if (!inAttackArea) return;
 
 		if (now - lastAttack >= attackTime) {
-			GD.Print("attacks");
+			--target.health;
 			lastAttack = now;
 		}
 	}
