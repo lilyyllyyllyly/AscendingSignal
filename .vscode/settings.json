@@ -1,0 +1,7 @@
+{
+    "files.exclude": {
+        "**/.godot": true,
+        "**/.vscode": true,
+        "**/*.import": true
+    }
+}
