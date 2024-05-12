@@ -34,7 +34,7 @@ public partial class Bird : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (!IsInstanceValid(target)) {
+		if (!IsInstanceValid(target) || target.health <= 0) {
 			long r = GD.Randi() % GameManager.instance.balloons.Length;
 			target = GameManager.instance.balloons[r];
 			return;

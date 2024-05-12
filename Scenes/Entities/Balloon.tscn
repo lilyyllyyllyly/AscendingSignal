@@ -105,13 +105,15 @@ top_level = true
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_o4f5q")
 
-[node name="Balloon" type="Node2D" parent="." node_paths=PackedStringArray("anim", "fireAnim", "textHP")]
+[node name="Balloon" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "parent", "anim", "fireAnim", "textHP")]
 modulate = Color(1, 1, 1, 0.607843)
 z_index = -10
 position = Vector2(0, -80)
 scale = Vector2(7, 7)
 script = ExtResource("2_17alc")
 maxHealth = 5.0
+sprite = NodePath("../Sprite2D")
+parent = NodePath("..")
 anim = NodePath("../AnimationPlayer")
 fireAnim = NodePath("../Sprite2D/fire/AnimationPlayer")
 textHP = NodePath("../HP")

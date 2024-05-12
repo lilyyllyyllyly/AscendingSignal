@@ -6,6 +6,15 @@ public partial class Balloon : Node2D
 	[Signal] public delegate void TakeHitEventHandler();
 
 	[Export] private float maxHealth = 10;
+	private float size;
+	[Export] private float accel = 22.4f;
+
+	[Export] private Sprite2D sprite;
+
+	[Export] private Vector2 velocity;
+
+	[Export] private Node2D parent;
+
 	private float _health;
 
 	public float health {
@@ -33,13 +42,22 @@ public partial class Balloon : Node2D
 
 		fireAnim.Play("fire");
 		fireAnim.Seek((GD.Randi() % 3)/10.0);
+
+		size = sprite.Texture.GetHeight();
 	}
 
 	public override void _Process(double delta)
 	{
 		textHP.Text = $"{health} HP";
 		if (_health <= 0) {
-			GetNode("..").QueueFree();
+			textHP.Visible = false;
+			// Begin kill sequence.
+			if (parent.Position.Y > 225 + size) {
+				parent.QueueFree();
+			}
+
+			velocity.Y += accel * (float)delta;
+			parent.Position += velocity * (float)delta;
 		}
 	}
 }
