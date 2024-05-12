@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://c0bfb2lhekvww"]
 
 [ext_resource type="Script" path="res://Scripts/Menu.cs" id="1_2ww00"]
-[ext_resource type="Theme" uid="uid://bwwwn1t7xj6x8" path="res://Sprites/Themes/BaseTheme.tres" id="1_5yjne"]
 [ext_resource type="Script" path="res://Scripts/SceneChanger.cs" id="2_uj307"]
 [ext_resource type="PackedScene" uid="uid://dhwtnopvdnw6o" path="res://Scenes/Props/BalloonProp.tscn" id="2_upvgg"]
+[ext_resource type="Theme" path="res://Sprites/Themes/BaseTheme.tres" id="3_yorut"]
 [ext_resource type="Texture2D" uid="uid://434ljf1hjx1s" path="res://Sprites/bg.png" id="5_t6gc5"]
 
 [node name="Menu" type="Node2D" node_paths=PackedStringArray("leftBars", "rightBars")]
@@ -21,6 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_yorut")
 
 [node name="Title" type="Label" parent="UIView/Menu"]
 layout_mode = 1
@@ -32,7 +33,7 @@ offset_top = 20.0
 offset_right = 65.0
 offset_bottom = 43.0
 grow_horizontal = 2
-theme = ExtResource("1_5yjne")
+theme = ExtResource("3_yorut")
 theme_override_font_sizes/font_size = 30
 text = "Ascending Signal"
 horizontal_alignment = 1
@@ -51,7 +52,7 @@ offset_right = 18.0
 offset_bottom = 12.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_5yjne")
+theme = ExtResource("3_yorut")
 text = "Play"
 
 [node name="SceneChanger" type="Node" parent="UIView/Menu/PlayButton"]
@@ -71,7 +72,7 @@ offset_right = 31.0
 offset_bottom = 43.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_5yjne")
+theme = ExtResource("3_yorut")
 text = "Options"
 
 [node name="SceneChanger" type="Node" parent="UIView/Menu/Options"]
@@ -91,7 +92,7 @@ offset_right = 69.0
 offset_bottom = 72.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_5yjne")
+theme = ExtResource("3_yorut")
 text = "Quit to Desktop"
 
 [node name="LeftOne" type="ColorRect" parent="UIView/Menu"]
