@@ -4,14 +4,12 @@ using System;
 
 public partial class Saves : Node
 {
-	public static bool WantsFullScreen = false;
 	public static bool WantsScreenShake = true;
 	public static bool HasEndless = false;
 
 	public static void SaveGame() {
 		using var saveGame = FileAccess.Open("user://SaveData.save", FileAccess.ModeFlags.Write);
 		var data = new Dictionary {
-			{"FullScreen", WantsFullScreen},
 			{"Screen Shake", WantsScreenShake},
 			{"Endless Unlocked", HasEndless}
 		};
@@ -34,8 +32,6 @@ public partial class Saves : Node
 		var err = json.Parse(jsonContent);
 		if (err == Error.Ok) {
 			Dictionary recieved = (Dictionary)json.Data;
-			
-			WantsFullScreen = (bool)recieved["FullScreen"];
 			WantsScreenShake = (bool)recieved["Screen Shake"];
 			HasEndless = (bool)recieved["Endless Unlocked"];
 

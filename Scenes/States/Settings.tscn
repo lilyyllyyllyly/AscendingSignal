@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Settings.cs" id="1_a41yy"]
 [ext_resource type="LabelSettings" uid="uid://bv2lp334cqmwh" path="res://Sprites/Themes/BaseFont.tres" id="1_j5556"]
 [ext_resource type="FontFile" uid="uid://dsfiogj66lwmu" path="res://Sprites/Fonts/Poco.ttf" id="2_av4w8"]
-[ext_resource type="Theme" path="res://Sprites/Themes/BaseTheme.tres" id="2_csq4p"]
+[ext_resource type="Theme" uid="uid://bwwwn1t7xj6x8" path="res://Sprites/Themes/BaseTheme.tres" id="2_csq4p"]
 [ext_resource type="Script" path="res://Scripts/SceneChanger.cs" id="7_motsv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pgc4r"]
@@ -18,9 +18,8 @@ font_size = 10
 font = ExtResource("2_av4w8")
 font_size = 10
 
-[node name="Settings" type="Node2D" node_paths=PackedStringArray("fullScreen", "screenShake")]
+[node name="Settings" type="Node2D" node_paths=PackedStringArray("screenShake")]
 script = ExtResource("1_a41yy")
-fullScreen = NodePath("CanvasLayer/Control/FullScreen")
 screenShake = NodePath("CanvasLayer/Control/Shake")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -60,31 +59,12 @@ theme = ExtResource("2_csq4p")
 text = "Game Options"
 label_settings = ExtResource("1_j5556")
 
-[node name="FullScreen" type="CheckBox" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 18.0
-offset_top = 82.0
-offset_right = 38.0
-offset_bottom = 99.0
-theme = ExtResource("2_csq4p")
-text = "
-"
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/FullScreen"]
-layout_mode = 0
-offset_left = 22.0
-offset_top = -5.0
-offset_right = 110.0
-offset_bottom = 19.0
-theme = ExtResource("2_csq4p")
-text = "Fullscreen"
-
 [node name="Shake" type="CheckBox" parent="CanvasLayer/Control"]
 layout_mode = 0
 offset_left = 18.0
-offset_top = 106.0
+offset_top = 91.0
 offset_right = 38.0
-offset_bottom = 127.0
+offset_bottom = 115.0
 theme = ExtResource("2_csq4p")
 text = "
 "
@@ -128,7 +108,17 @@ theme = ExtResource("2_csq4p")
 text = "Art & sprites Lilliana"
 label_settings = SubResource("LabelSettings_ek2a1")
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/Credits Master"]
+[node name="Art2" type="Label" parent="CanvasLayer/Control/Credits Master"]
+layout_mode = 0
+offset_left = -31.0
+offset_top = 46.0
+offset_right = 61.0
+offset_bottom = 69.0
+theme = ExtResource("2_csq4p")
+text = "Poco font from fontenddev.com"
+label_settings = SubResource("LabelSettings_ek2a1")
+
+[node name="Misc" type="Label" parent="CanvasLayer/Control/Credits Master"]
 layout_mode = 0
 offset_left = 28.0
 offset_top = 126.0
@@ -152,6 +142,5 @@ text = "Main Menu"
 script = ExtResource("7_motsv")
 scenePath = "res://Scenes/States/Menu.tscn"
 
-[connection signal="toggled" from="CanvasLayer/Control/FullScreen" to="." method="ToggleFullScreen"]
 [connection signal="pressed" from="CanvasLayer/Control/Shake" to="." method="ToggleScreenShake"]
 [connection signal="pressed" from="CanvasLayer/Control/MainMenu" to="CanvasLayer/Control/MainMenu/SceneChanger" method="ChangeScene"]
