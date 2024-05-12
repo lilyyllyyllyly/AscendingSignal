@@ -108,7 +108,6 @@ accel = 500.0
 jumpForce = -180.0
 jumpHold = 150.0
 anim = NodePath("AnimationPlayer")
-shootSlowTime = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 top_level = true

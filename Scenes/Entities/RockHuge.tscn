@@ -8,8 +8,8 @@ radius = 22.0
 
 [node name="RockBig" type="Node2D"]
 script = ExtResource("1_m3ior")
-speed = 125.0
-lifetime = 3.0
+speed = 85.0
+lifetime = 5.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_ex012")

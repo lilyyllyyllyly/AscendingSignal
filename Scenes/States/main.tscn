@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://gs2jlmggvj4j"]
+[gd_scene load_steps=18 format=3 uid="uid://gs2jlmggvj4j"]
 
 [ext_resource type="Script" path="res://Scripts/GameManager.cs" id="1_hq04o"]
 [ext_resource type="Script" path="res://Scripts/Camera.cs" id="1_r2bng"]
@@ -10,11 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://b84et206spagb" path="res://Scenes/Entities/Balloon.tscn" id="4_3w46a"]
 [ext_resource type="Script" path="res://Scripts/SceneChanger.cs" id="5_3jpr3"]
 [ext_resource type="Texture2D" uid="uid://434ljf1hjx1s" path="res://Sprites/bg.png" id="5_46cya"]
-[ext_resource type="PackedScene" uid="uid://cdglubk1sredt" path="res://Scenes/Entities/RockSmall.tscn" id="8_hv208"]
+[ext_resource type="PackedScene" uid="uid://b773hboobembd" path="res://Scenes/Entities/RockSpawner.tscn" id="8_ny5gd"]
 [ext_resource type="AudioStream" uid="uid://b08087faj4rh0" path="res://Sounds/win.wav" id="8_pypci"]
 [ext_resource type="Script" path="res://Scripts/PlaySound.cs" id="9_jjnjt"]
-[ext_resource type="PackedScene" uid="uid://icuiw3fo1fk3" path="res://Scenes/Entities/RockBig.tscn" id="9_mlu0c"]
-[ext_resource type="PackedScene" uid="uid://db5cqfl42sast" path="res://Scenes/Entities/RockHuge.tscn" id="10_r222u"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_hmtkr"]
 line_spacing = 1.0
@@ -194,7 +192,8 @@ bird = ExtResource("2_o3rcn")
 birdSpawnArea = Rect2(0, -20, 400, 0)
 endGameText = NodePath("../UIView/UI/EndWarn")
 spawnTimeDecrement = 0.1
-rocks = Array[PackedScene]([ExtResource("8_hv208"), ExtResource("9_mlu0c"), ExtResource("10_r222u")])
+rockSpawner = ExtResource("8_ny5gd")
+rockSpawnArea = Rect2(32, 20, 336, 0)
 rockSpawnPlayerRange = 60.0
 rockTimer = NodePath("RockSpawnTimer")
 rockSpawnTimeDecrement = 0.25
@@ -209,7 +208,7 @@ wait_time = 2.3
 autostart = true
 
 [node name="Metres" type="Timer" parent="GameManager"]
-wait_time = 0.4
+wait_time = 0.3
 autostart = true
 
 [node name="PlaySound" type="AudioStreamPlayer" parent="GameManager"]

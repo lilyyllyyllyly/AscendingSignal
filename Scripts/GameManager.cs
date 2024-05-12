@@ -22,7 +22,8 @@ public partial class GameManager : Node
 
 	[Export] private float spawnTimeDecrement;
 
-	[Export] private PackedScene[] rocks;
+	[Export] private PackedScene rockSpawner;
+	[Export] private Rect2 rockSpawnArea;
 	[Export] private float rockSpawnPlayerRange;
 	[Export] private Timer rockTimer;
 	[Export] private float rockSpawnTimeDecrement;
@@ -81,27 +82,28 @@ public partial class GameManager : Node
 		}
 	}
 
-	private void SetRock(bool second) {
-		Node2D newRock = (Node2D)rocks[Random.Shared.Next(0, rocks.Length)].Instantiate();
-		GetTree().CurrentScene.AddChild(newRock);
+	private void SetRock() {
+		Node2D newRock = (Node2D)rockSpawner.Instantiate();
 
 		float posX, posY;
 		int r = Random.Shared.Next(0, 3);
-		if (r == 0) { // either same area as birds
-			posX = rng.RandfRange(birdSpawnArea.Position.X, birdSpawnArea.Position.X + birdSpawnArea.Size.X);
-			posY = rng.RandfRange(birdSpawnArea.Position.Y, birdSpawnArea.Position.Y + birdSpawnArea.Size.Y);
+		if (r == 0) { // either anywhere on screen
+			posX = rng.RandfRange(rockSpawnArea.Position.X, rockSpawnArea.Position.X + rockSpawnArea.Size.X);
+			posY = rng.RandfRange(rockSpawnArea.Position.Y, rockSpawnArea.Position.Y + rockSpawnArea.Size.Y);
 		} else { // or near the player
 			posX = player.GlobalPosition.X + (Random.Shared.NextSingle() - 0.5f) * rockSpawnPlayerRange;
-			posY = rng.RandfRange(birdSpawnArea.Position.Y, birdSpawnArea.Position.Y + birdSpawnArea.Size.Y);
+			posY = rng.RandfRange(rockSpawnArea.Position.Y, rockSpawnArea.Position.Y + rockSpawnArea.Size.Y);
 		}
 
-		newRock.GlobalPosition = new Vector2(posX, second? posY - 20 : posY); // hardcoded af second rock should be higher if 2 spawn (so they dont look super synced)
+		newRock.GlobalPosition = new Vector2(posX, posY);
+
+		GetTree().CurrentScene.AddChild(newRock);
 	}
 
 	public void SpawnRock() {
-		SetRock(false);
+		SetRock();
 		if (Random.Shared.Next(0, birdSpawnChance) == birdSpawnChance - 1) { // reusing birdSpawnChance cuz i cant be asked
-			SetRock(true);
+			SetRock();
 		}
 	}
 

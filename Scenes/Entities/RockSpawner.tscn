@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://b773hboobembd"]
+
+[ext_resource type="Script" path="res://Scripts/RockSpawner.cs" id="1_6b27l"]
+[ext_resource type="Texture2D" uid="uid://bskghh4iig7ij" path="res://Sprites/warning.png" id="1_d7v0q"]
+[ext_resource type="PackedScene" uid="uid://cdglubk1sredt" path="res://Scenes/Entities/RockSmall.tscn" id="2_nx2uc"]
+[ext_resource type="PackedScene" uid="uid://icuiw3fo1fk3" path="res://Scenes/Entities/RockBig.tscn" id="3_m8xyr"]
+[ext_resource type="PackedScene" uid="uid://db5cqfl42sast" path="res://Scenes/Entities/RockHuge.tscn" id="4_5cwcj"]
+
+[node name="RockSpawner" type="Node2D"]
+script = ExtResource("1_6b27l")
+rocks = Array[PackedScene]([ExtResource("2_nx2uc"), ExtResource("3_m8xyr"), ExtResource("4_5cwcj")])
+distMin = 200.0
+distMax = 220.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_d7v0q")
+
+[node name="Die" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[connection signal="timeout" from="Die" to="." method="queue_free"]

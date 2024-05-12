@@ -24,24 +24,16 @@ public partial class Player : CharacterBody2D
 
 	[Signal] public delegate void JumpStartedEventHandler();
 
-	[Export] private float shootSlowTime = 0.3f;
-	private float lastSlow;
-
 	public override void _PhysicsProcess(double delta)
 	{
 		float now = Time.GetTicksMsec();
-
-		if (Input.IsActionPressed("fire")) lastSlow = now;
 
 		// Horizontal Movement
 		float direction = Input.GetAxis("left", "right");
 		if (direction != 0) anim.Play("walk");
 		else anim.Play("idle");
 
-		float realSpeed = speed;
-		if (now - lastSlow < shootSlowTime) realSpeed = speed/2;
-
-		float goalVel = direction * realSpeed;
+		float goalVel = direction * speed;
 
 		float maxMove = accel;
 		if (Mathf.Sign(direction) != 0 && Mathf.Sign(direction) != Mathf.Sign(Velocity.X)) {
