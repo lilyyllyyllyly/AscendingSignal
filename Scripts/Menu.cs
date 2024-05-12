@@ -8,6 +8,8 @@ public partial class Menu : Node2D
 	[Export] private ColorRect[] leftBars;
 	[Export] private ColorRect[] rightBars;
 
+	[Export] private ColorRect panel;
+
 	private int activeBarIdx = 0;
 
 	private Color inactive;
@@ -23,7 +25,7 @@ public partial class Menu : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
-
+		if (Input.IsActionJustPressed("hide")) panel.Visible = !panel.Visible;
 	}
 
 	private void ResetBars() {

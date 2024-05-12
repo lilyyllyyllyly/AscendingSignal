@@ -1,16 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0bfb2lhekvww"]
+[gd_scene load_steps=9 format=3 uid="uid://c0bfb2lhekvww"]
 
 [ext_resource type="Script" path="res://Scripts/Menu.cs" id="1_2ww00"]
 [ext_resource type="Script" path="res://Scripts/SceneChanger.cs" id="2_uj307"]
 [ext_resource type="PackedScene" uid="uid://dhwtnopvdnw6o" path="res://Scenes/Props/BalloonProp.tscn" id="2_upvgg"]
 [ext_resource type="Theme" uid="uid://bwwwn1t7xj6x8" path="res://Sprites/Themes/BaseTheme.tres" id="3_yorut"]
+[ext_resource type="LabelSettings" uid="uid://bv2lp334cqmwh" path="res://Sprites/Themes/BaseFont.tres" id="5_guklc"]
 [ext_resource type="Texture2D" uid="uid://434ljf1hjx1s" path="res://Sprites/bg.png" id="5_t6gc5"]
+[ext_resource type="FontFile" uid="uid://dsfiogj66lwmu" path="res://Sprites/Fonts/Poco.ttf" id="6_b7sdh"]
 
-[node name="Menu" type="Node2D" node_paths=PackedStringArray("leftBars", "rightBars")]
+[sub_resource type="LabelSettings" id="LabelSettings_1i1fp"]
+line_spacing = 1.0
+font = ExtResource("6_b7sdh")
+font_size = 10
+
+[node name="Menu" type="Node2D" node_paths=PackedStringArray("leftBars", "rightBars", "panel")]
 script = ExtResource("1_2ww00")
 balloon = ExtResource("2_upvgg")
 leftBars = [NodePath("UIView/Menu/LeftFour"), NodePath("UIView/Menu/LeftThree"), NodePath("UIView/Menu/LeftTwo"), NodePath("UIView/Menu/LeftOne")]
 rightBars = [NodePath("UIView/Menu/RightFour"), NodePath("UIView/Menu/RightThree"), NodePath("UIView/Menu/RightTwo"), NodePath("UIView/Menu/RightOne")]
+panel = NodePath("UIView/Menu/Controls")
 
 [node name="UIView" type="CanvasLayer" parent="."]
 
@@ -94,6 +102,45 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_yorut")
 text = "Quit to Desktop"
+
+[node name="Controls" type="ColorRect" parent="UIView/Menu"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -92.0
+offset_right = 93.0
+offset_bottom = -2.0
+grow_vertical = 0
+color = Color(0.133333, 0.133333, 0.133333, 0.623529)
+
+[node name="Header" type="Label" parent="UIView/Menu/Controls"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 13.0
+offset_right = 88.0
+offset_bottom = 88.0
+text = "A/J -> Left
+D/L -> Right
+W/I/Z/Space -> Jump
+Click -> Shoot
+Esc/P -> Pause
+H -> Hide controls"
+label_settings = SubResource("LabelSettings_1i1fp")
+
+[node name="Controls" type="Label" parent="UIView/Menu/Controls/Header"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -99.0
+offset_right = 79.0
+offset_bottom = -75.0
+grow_vertical = 0
+text = "Controls"
+label_settings = ExtResource("5_guklc")
 
 [node name="LeftOne" type="ColorRect" parent="UIView/Menu"]
 layout_mode = 0

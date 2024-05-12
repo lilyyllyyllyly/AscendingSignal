@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://w7jh73mivvd4" path="res://Scenes/Entities/Player/Gun/Gun.tscn" id="3_xfd15"]
 [ext_resource type="AudioStream" uid="uid://brnb52b32lbng" path="res://Sounds/jump.wav" id="5_noln6"]
 [ext_resource type="Script" path="res://Scripts/PlaySound.cs" id="6_x3501"]
-[ext_resource type="AudioStream" uid="uid://cmsvcuq4ns6g4" path="res://Sounds/step.wav" id="7_d3d3i"]
+[ext_resource type="AudioStream" uid="uid://dkhm246oi41f5" path="res://Sounds/step.wav" id="7_d3d3i"]
 [ext_resource type="Script" path="res://Scripts/SceneChanger.cs" id="8_7fjfx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s2rt8"]
