@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://b84et206spagb"]
 
 [ext_resource type="Script" path="res://Scripts/Balloon.cs" id="2_17alc"]
-[ext_resource type="Texture2D" uid="uid://d4cvs34u7tawp" path="res://Sprites/balloon.png" id="2_uesl4"]
+[ext_resource type="Texture2D" uid="uid://5nj1qcnuvvq2" path="res://Sprites/balloon.png" id="2_uesl4"]
 [ext_resource type="Texture2D" uid="uid://dx64lgow31nax" path="res://Sprites/Fire/fire3.png" id="3_m7wlc"]
 [ext_resource type="Script" path="res://Scripts/Flash.cs" id="3_ukkdg"]
 [ext_resource type="Texture2D" uid="uid://whm5xypshs76" path="res://Sprites/Fire/fire1.png" id="4_j1gx1"]
@@ -113,7 +113,6 @@ z_index = -10
 position = Vector2(0, -80)
 scale = Vector2(7, 7)
 script = ExtResource("2_17alc")
-maxHealth = 5.0
 sprite = NodePath("../Sprite2D")
 parent = NodePath("..")
 anim = NodePath("../AnimationPlayer")
@@ -124,6 +123,7 @@ textHP = NodePath("../HP")
 z_index = -10
 texture = ExtResource("2_uesl4")
 offset = Vector2(0, -56)
+hframes = 6
 script = ExtResource("3_ukkdg")
 flashMaterial = ExtResource("4_wvvm5")
 

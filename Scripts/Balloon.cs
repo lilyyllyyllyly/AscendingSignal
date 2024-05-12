@@ -5,11 +5,11 @@ public partial class Balloon : Node2D
 {
 	[Signal] public delegate void TakeHitEventHandler();
 
-	[Export] private float maxHealth = 10;
+	[Export] private float maxHealth = 5;
 	private float size;
 	[Export] private float accel = 22.4f;
 
-	[Export] private Sprite2D sprite;
+	[Export] private Flash sprite;
 
 	[Export] private Vector2 velocity;
 
@@ -25,6 +25,9 @@ public partial class Balloon : Node2D
 		set {
 			if (value < _health) EmitSignal(SignalName.TakeHit);
 			_health = value;
+			if (IsInstanceValid(sprite)) {
+				sprite.Frame = Mathf.Clamp((int)(maxHealth-value), 0, sprite.Hframes);
+			}
 		}
 	}
 

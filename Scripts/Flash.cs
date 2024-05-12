@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Flash : Node2D
+public partial class Flash : Sprite2D
 {
 	[Export] private float flashTime = 100;
 	private float lastFlash;
