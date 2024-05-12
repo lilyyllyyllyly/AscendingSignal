@@ -1,8 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://dj5fk388h5m3l"]
+[gd_scene load_steps=8 format=3 uid="uid://dj5fk388h5m3l"]
 
 [ext_resource type="Theme" uid="uid://bwwwn1t7xj6x8" path="res://Sprites/Themes/BaseTheme.tres" id="1_c8d1h"]
 [ext_resource type="LabelSettings" uid="uid://bv2lp334cqmwh" path="res://Sprites/Themes/BaseFont.tres" id="1_i68fg"]
 [ext_resource type="Script" path="res://Scripts/SceneChanger.cs" id="3_usvoo"]
+[ext_resource type="Texture2D" uid="uid://brtlb15sm0n8l" path="res://Sprites/win.png" id="4_flwpt"]
+[ext_resource type="Script" path="res://Scripts/WinAnimation.cs" id="5_b7flo"]
+
+[sub_resource type="Animation" id="Animation_gmpbm"]
+resource_name = "yes"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(0.54075, 0.54, 1),
+"update": 0,
+"values": [Vector2(212, 119), Vector2(212, 114), Vector2(212, 119)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mfolm"]
+_data = {
+"yes": SubResource("Animation_gmpbm")
+}
 
 [node name="Win" type="Node2D"]
 
@@ -20,11 +44,11 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="UIView/UI"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = -1
+anchor_left = 0.0775
+anchor_top = 0.482222
+anchor_right = 0.5525
+anchor_bottom = 0.602222
 offset_left = -20.0
 offset_top = -11.5
 offset_right = 20.0
@@ -32,12 +56,20 @@ offset_bottom = 12.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_c8d1h")
-text = "Win."
+text = "Congrats!
+You Got Enough Signal
+And Called Home!"
 label_settings = ExtResource("1_i68fg")
+horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="PlayAgainButton" type="Button" parent="UIView/UI"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.695
+anchor_top = -0.728889
+anchor_right = -0.695
+anchor_bottom = -0.728889
 offset_left = 303.0
 offset_top = 189.0
 offset_right = 393.0
@@ -52,9 +84,10 @@ scenePath = "res://Scenes/States/main.tscn"
 
 [node name="MenuButton" type="Button" parent="UIView/UI"]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_top = 0.124444
+anchor_right = 0.115
+anchor_bottom = 0.124444
 offset_left = 6.0
 offset_top = -34.0
 offset_right = 96.0
@@ -67,6 +100,17 @@ metadata/_edit_use_anchors_ = true
 [node name="SceneChanger" type="Node" parent="UIView/UI/MenuButton"]
 script = ExtResource("3_usvoo")
 scenePath = "res://Scenes/States/Menu.tscn"
+
+[node name="Win" type="Sprite2D" parent="." node_paths=PackedStringArray("anim")]
+position = Vector2(212, 119)
+texture = ExtResource("4_flwpt")
+script = ExtResource("5_b7flo")
+anim = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Win"]
+libraries = {
+"": SubResource("AnimationLibrary_mfolm")
+}
 
 [connection signal="pressed" from="UIView/UI/PlayAgainButton" to="UIView/UI/PlayAgainButton/SceneChanger" method="ChangeScene"]
 [connection signal="pressed" from="UIView/UI/MenuButton" to="UIView/UI/MenuButton/SceneChanger" method="ChangeScene"]
