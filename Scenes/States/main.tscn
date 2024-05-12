@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://gs2jlmggvj4j"]
+[gd_scene load_steps=20 format=3 uid="uid://gs2jlmggvj4j"]
 
 [ext_resource type="Script" path="res://Scripts/GameManager.cs" id="1_hq04o"]
 [ext_resource type="Script" path="res://Scripts/Camera.cs" id="1_r2bng"]
@@ -8,8 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://cvqngf3u5s5yd" path="res://Scenes/Entities/Player/Player.tscn" id="3_26y4g"]
 [ext_resource type="FontFile" uid="uid://dsfiogj66lwmu" path="res://Sprites/Fonts/Poco.ttf" id="3_h6kjy"]
 [ext_resource type="PackedScene" uid="uid://b84et206spagb" path="res://Scenes/Entities/Balloon.tscn" id="4_3w46a"]
+[ext_resource type="Theme" uid="uid://bwwwn1t7xj6x8" path="res://Sprites/Themes/BaseTheme.tres" id="4_x4ygl"]
 [ext_resource type="Script" path="res://Scripts/SceneChanger.cs" id="5_3jpr3"]
 [ext_resource type="Texture2D" uid="uid://434ljf1hjx1s" path="res://Sprites/bg.png" id="5_46cya"]
+[ext_resource type="Texture2D" uid="uid://bk0ceyt6xxev8" path="res://Sprites/callbtn.png" id="5_u6edd"]
 [ext_resource type="PackedScene" uid="uid://b773hboobembd" path="res://Scenes/Entities/RockSpawner.tscn" id="8_irwys"]
 [ext_resource type="AudioStream" uid="uid://b08087faj4rh0" path="res://Sounds/win.wav" id="8_pypci"]
 [ext_resource type="Script" path="res://Scripts/PlaySound.cs" id="9_jjnjt"]
@@ -95,16 +97,69 @@ offset_right = 34.0
 offset_bottom = 26.0
 color = Color(0.442911, 0.442911, 0.442911, 1)
 
-[node name="EndWarn" type="Label" parent="UIView/UI"]
+[node name="Win" type="ColorRect" parent="UIView/UI"]
 visible = false
-layout_mode = 0
-offset_left = 23.0
-offset_top = 27.0
-offset_right = 257.0
-offset_bottom = 52.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -90.0
+offset_right = 100.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.541176)
+
+[node name="EndWarn" type="Label" parent="UIView/UI/Win"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -117.0
+offset_top = 10.0
+offset_right = 117.0
+offset_bottom = 35.0
+grow_horizontal = 2
 text = "You've reached full signal!
-You can now call home! Press E."
+You can now call home!"
 label_settings = SubResource("LabelSettings_hmtkr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="UIView/UI/Win"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -16.0
+offset_right = 32.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_x4ygl")
+icon = ExtResource("5_u6edd")
+
+[node name="Label" type="Label" parent="UIView/UI/Win/Button"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = -0.5
+offset_right = 60.0
+offset_bottom = 23.5
+theme_override_colors/font_color = Color(0.172549, 0.788235, 0.305882, 1)
+text = "Call"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SceneChanger" type="Node" parent="UIView/UI/Win/Button"]
+script = ExtResource("5_3jpr3")
+scenePath = "res://Scenes/States/Win.tscn"
 
 [node name="Pause" type="Control" parent="UIView"]
 process_mode = 3
@@ -183,14 +238,14 @@ flat = true
 script = ExtResource("5_3jpr3")
 scenePath = "res://Scenes/States/Menu.tscn"
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("spawnTimer", "balloons", "bars", "endGameText", "rockTimer", "player")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("spawnTimer", "balloons", "bars", "endGameScreen", "rockTimer", "player")]
 script = ExtResource("1_hq04o")
 spawnTimer = NodePath("SpawnTimer")
 balloons = [NodePath("../Balloon/Balloon"), NodePath("../Balloon2/Balloon"), NodePath("../Balloon3/Balloon")]
 bars = [NodePath("../UIView/UI/BarOne"), NodePath("../UIView/UI/BarTwo"), NodePath("../UIView/UI/BarThree"), NodePath("../UIView/UI/BarFour"), NodePath("../UIView/UI/BarFive")]
 bird = ExtResource("2_o3rcn")
 birdSpawnArea = Rect2(0, -20, 400, 0)
-endGameText = NodePath("../UIView/UI/EndWarn")
+endGameScreen = NodePath("../UIView/UI/Win")
 spawnTimeDecrement = 0.1
 rockSpawner = ExtResource("8_irwys")
 rockSpawnArea = Rect2(32, 20, 336, 0)
@@ -212,6 +267,7 @@ wait_time = 0.3
 autostart = true
 
 [node name="WinSound" type="AudioStreamPlayer" parent="GameManager"]
+process_mode = 3
 stream = ExtResource("8_pypci")
 volume_db = -5.0
 script = ExtResource("9_jjnjt")
@@ -234,6 +290,8 @@ z_index = -50
 texture = ExtResource("5_46cya")
 centered = false
 
+[connection signal="pressed" from="UIView/UI/Win/Button" to="UIView/Pause" method="GameResume"]
+[connection signal="pressed" from="UIView/UI/Win/Button" to="UIView/UI/Win/Button/SceneChanger" method="ChangeScene"]
 [connection signal="pressed" from="UIView/Pause/ResumeButton" to="UIView/Pause" method="GameResume"]
 [connection signal="pressed" from="UIView/Pause/QuitButton" to="UIView/Pause" method="GameResume"]
 [connection signal="pressed" from="UIView/Pause/QuitButton" to="UIView/Pause/QuitButton/SceneChanger" method="ChangeScene"]

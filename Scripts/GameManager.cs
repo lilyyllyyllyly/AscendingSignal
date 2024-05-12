@@ -18,7 +18,7 @@ public partial class GameManager : Node
 	[Export] private PackedScene bird;
 	[Export] private Rect2 birdSpawnArea;
 
-	[Export] private Label endGameText;
+	[Export] private Control endGameScreen;
 
 	[Export] private float spawnTimeDecrement;
 
@@ -54,12 +54,6 @@ public partial class GameManager : Node
 		}
 
 		rng = new RandomNumberGenerator();
-	}
-
-	public override void _PhysicsProcess(double delta) {
-		if (Input.IsActionJustPressed("leave") && canEndGame) {
-			GetTree().ChangeSceneToFile("res://Scenes/States/Win.tscn");
-		}
 	}
 
 	private void SetBird() {
@@ -107,6 +101,10 @@ public partial class GameManager : Node
 		}
 	}
 
+	private void WinPause() {
+		GetTree().Paused = true;
+	}
+
 	private void OnMetreTravelled() {
 		metresTravelled += 1;
 
@@ -122,10 +120,13 @@ public partial class GameManager : Node
 			if (currentBar > bars.Length - 1) return;
 
 			if (currentBar == bars.Length - 1) {
-				if (!canEndGame) EmitSignal(SignalName.Won);
+				if (!canEndGame) {
+					EmitSignal(SignalName.Won);
+					CallDeferred("WinPause");
+				}
 
 				canEndGame = true;
-				endGameText.Visible = true;
+				endGameScreen.Visible = true;
 			}
 
 			bars[currentBar].Color = new Color("34f35f");
