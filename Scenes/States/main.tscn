@@ -211,7 +211,7 @@ autostart = true
 wait_time = 0.3
 autostart = true
 
-[node name="PlaySound" type="AudioStreamPlayer" parent="GameManager"]
+[node name="WinSound" type="AudioStreamPlayer" parent="GameManager"]
 stream = ExtResource("8_pypci")
 volume_db = -5.0
 script = ExtResource("9_jjnjt")
@@ -237,6 +237,7 @@ centered = false
 [connection signal="pressed" from="UIView/Pause/ResumeButton" to="UIView/Pause" method="GameResume"]
 [connection signal="pressed" from="UIView/Pause/QuitButton" to="UIView/Pause" method="GameResume"]
 [connection signal="pressed" from="UIView/Pause/QuitButton" to="UIView/Pause/QuitButton/SceneChanger" method="ChangeScene"]
+[connection signal="Won" from="GameManager" to="GameManager/WinSound" method="PlayAudio"]
 [connection signal="timeout" from="GameManager/RockSpawnTimer" to="GameManager" method="SpawnRock"]
 [connection signal="timeout" from="GameManager/SpawnTimer" to="GameManager" method="SpawnBird"]
 [connection signal="timeout" from="GameManager/Metres" to="GameManager" method="OnMetreTravelled"]
