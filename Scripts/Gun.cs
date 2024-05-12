@@ -3,6 +3,8 @@ using System;
 
 public partial class Gun : Node2D
 {
+	[Signal] public delegate void ShotEventHandler();
+
 	[Export] private PackedScene projectile;
 	[Export] private Node2D spawnPoint;
 
@@ -15,10 +17,12 @@ public partial class Gun : Node2D
 		if (now - lastShoot >= shootDelay && Input.IsActionPressed("fire")) {
 			lastShoot = now;
 
-			Node2D newProj = projectile.Instantiate().GetNode<Node2D>(".");
+			Node2D newProj = (Node2D)projectile.Instantiate();
 			GetTree().CurrentScene.AddChild(newProj);
 			newProj.GlobalPosition = spawnPoint.GlobalPosition;
 			newProj.Rotation = Rotation;
+
+			EmitSignal(SignalName.Shot);
 		}
 
 		Vector2 diff = GetGlobalMousePosition() - GlobalPosition;

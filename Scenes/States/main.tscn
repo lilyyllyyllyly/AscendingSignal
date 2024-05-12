@@ -1,12 +1,28 @@
-[gd_scene load_steps=8 format=3 uid="uid://gs2jlmggvj4j"]
+[gd_scene load_steps=14 format=3 uid="uid://gs2jlmggvj4j"]
 
 [ext_resource type="Script" path="res://Scripts/GameManager.cs" id="1_hq04o"]
 [ext_resource type="Script" path="res://Scripts/Camera.cs" id="1_r2bng"]
 [ext_resource type="LabelSettings" uid="uid://bv2lp334cqmwh" path="res://Sprites/Themes/BaseFont.tres" id="2_5atlx"]
+[ext_resource type="Script" path="res://Scripts/Pause.cs" id="2_nhlps"]
 [ext_resource type="PackedScene" uid="uid://140pyjbhucgw" path="res://Scenes/Entities/Bird.tscn" id="2_o3rcn"]
 [ext_resource type="PackedScene" uid="uid://cvqngf3u5s5yd" path="res://Scenes/Entities/Player/Player.tscn" id="3_26y4g"]
+[ext_resource type="FontFile" uid="uid://dsfiogj66lwmu" path="res://Sprites/Fonts/Poco.ttf" id="3_h6kjy"]
 [ext_resource type="PackedScene" uid="uid://b84et206spagb" path="res://Scenes/Entities/Balloon.tscn" id="4_3w46a"]
 [ext_resource type="Texture2D" uid="uid://434ljf1hjx1s" path="res://Sprites/bg.png" id="5_46cya"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hmtkr"]
+line_spacing = 1.0
+font = ExtResource("3_h6kjy")
+font_size = 10
+font_color = Color(1, 1, 0.478431, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bjaql"]
+font = ExtResource("3_h6kjy")
+font_size = 30
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1t4s0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cdgp2"]
 
 [node name="Main" type="Node2D"]
 
@@ -74,13 +90,98 @@ offset_right = 86.0
 offset_bottom = 28.0
 color = Color(0.442911, 0.442911, 0.442911, 1)
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("spawnTimer", "balloons", "bars")]
+[node name="EndWarn" type="Label" parent="UIView/UI"]
+visible = false
+layout_mode = 0
+offset_left = 23.0
+offset_top = 27.0
+offset_right = 257.0
+offset_bottom = 52.0
+text = "You've reached full signal!
+You can now call home! Press E."
+label_settings = SubResource("LabelSettings_hmtkr")
+
+[node name="Pause" type="Control" parent="UIView"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_nhlps")
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="UIView/Pause"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.541176)
+metadata/_edit_use_anchors_ = true
+
+[node name="PauseHeader" type="Label" parent="UIView/Pause"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.0
+offset_top = 21.77
+offset_right = 48.0
+offset_bottom = 57.77
+grow_horizontal = 2
+text = "Paused!"
+label_settings = SubResource("LabelSettings_bjaql")
+
+[node name="ResumeButton" type="Button" parent="UIView/Pause"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -15.5
+offset_right = 35.0
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.796078, 0.992157, 0, 1)
+theme_override_colors/font_hover_color = Color(0.898039, 1, 0.682353, 1)
+theme_override_fonts/font = ExtResource("3_h6kjy")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1t4s0")
+text = "Resume"
+flat = true
+
+[node name="QuitButton" type="Button" parent="UIView/Pause"]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 130.0
+offset_right = 258.0
+offset_bottom = 162.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.797931, 0.992716, 0.000295715, 1)
+theme_override_colors/font_hover_color = Color(0.898039, 1, 0.682353, 1)
+theme_override_fonts/font = ExtResource("3_h6kjy")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cdgp2")
+text = "Quit to title"
+flat = true
+
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("spawnTimer", "balloons", "bars", "endGameText")]
 script = ExtResource("1_hq04o")
 spawnTimer = NodePath("SpawnTimer")
 balloons = [NodePath("../Balloon/Balloon"), NodePath("../Balloon2/Balloon"), NodePath("../Balloon3/Balloon")]
 bars = [NodePath("../UIView/UI/BarOne"), NodePath("../UIView/UI/BarTwo"), NodePath("../UIView/UI/BarThree"), NodePath("../UIView/UI/BarFour"), NodePath("../UIView/UI/BarFive")]
 bird = ExtResource("2_o3rcn")
 birdSpawnArea = Rect2(0, -20, 400, 0)
+endGameText = NodePath("../UIView/UI/EndWarn")
 
 [node name="SpawnTimer" type="Timer" parent="GameManager"]
 wait_time = 4.0
@@ -102,15 +203,19 @@ position = Vector2(80, 190)
 [node name="Balloon3" parent="." instance=ExtResource("4_3w46a")]
 position = Vector2(320, 190)
 
-[node name="Bg" type="Sprite2D" parent="."]
+[node name="BackGround" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.572549)
 z_index = -50
 texture = ExtResource("5_46cya")
 centered = false
 
+[connection signal="pressed" from="UIView/Pause/ResumeButton" to="UIView/Pause" method="GameResume"]
 [connection signal="timeout" from="GameManager/SpawnTimer" to="GameManager" method="SpawnBird"]
 [connection signal="timeout" from="GameManager/Metres" to="GameManager" method="OnMetreTravelled"]
+[connection signal="Shot" from="Player/Gun" to="Cam" method="Shake" binds= [0.2]]
 
+[editable path="Player"]
+[editable path="Player/Gun"]
 [editable path="Balloon"]
 [editable path="Balloon2"]
 [editable path="Balloon3"]

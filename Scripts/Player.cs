@@ -15,6 +15,9 @@ public partial class Player : CharacterBody2D
 	private float jumpStart = 0;
 	private bool jumping = false;
 
+	private int gameHeight = 225;
+	private int playerSize = 8;
+
 	[Export] private AnimationPlayer anim;
 
 	public override void _PhysicsProcess(double delta)
@@ -64,6 +67,10 @@ public partial class Player : CharacterBody2D
 			}
 		}
 		// ---
+
+		if (Position.Y > gameHeight + playerSize) {
+			GetTree().ChangeSceneToFile("res://Scenes/States/Lose.tscn");
+		}
 
 		Velocity = new Vector2(xMove, yMove);
 		MoveAndSlide();

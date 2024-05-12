@@ -17,6 +17,8 @@ public partial class GameManager : Node
 	[Export] private PackedScene bird;
 	[Export] private Rect2 birdSpawnArea;
 
+	[Export] private Label endGameText;
+
 	private RandomNumberGenerator rng;
 
 	private int currentBar = 0;
@@ -24,6 +26,8 @@ public partial class GameManager : Node
 	private int metresTravelled = 0;
 
 	private int birdSpawnChance = 7;
+
+	private bool canEndGame = false;
 
 	public override void _Ready()
 	{
@@ -34,6 +38,12 @@ public partial class GameManager : Node
 		}
 
 		rng = new RandomNumberGenerator();
+	}
+
+	public override void _PhysicsProcess(double delta) {
+		if (Input.IsActionJustPressed("leave") && canEndGame) {
+			GetTree().ChangeSceneToFile("res://Scenes/States/Win.tscn");
+		}
 	}
 
 	private void SetBird() {
@@ -66,12 +76,16 @@ public partial class GameManager : Node
 
 		if (metresTravelled % 60 == 0) {
 			EmitSignal(SignalName.SixtyMetresTravelled);
-	
+
+			if (currentBar > bars.Length - 1) return;
+
+			if (currentBar == bars.Length - 1) {
+				canEndGame = true;
+				endGameText.Visible = true;
+			}
+
 			bars[currentBar].Color = new Color("34f35f");
 			currentBar += 1;
-			if (currentBar == bars.Length - 1) {
-				// TODO: kill the child.
-			}
 
 			// Cap spawn chance at 1/4
 			if (birdSpawnChance <= 4) return;
