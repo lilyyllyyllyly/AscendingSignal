@@ -10,11 +10,11 @@
 - ~~Feedback when enemy hits balloon (will probably come with sprites, both for enemy attack and hopefully visibly showing in the balloon how destroyed it is with holes or sth)~~
 
 ## Art/Visual
-- Make balloons fall instead of disappear
-- Show balloon health visually (or at least make health text more visible)
 - Better background (parallax and stuff, maybe bigger too) (it's a static background -eve)
 - Clouds that fly by
 - Little phone next to signal text
+- ~~Make balloons fall instead of disappear~~
+- ~~Show balloon health visually (or at least make health text more visible)~~
 - ~~Rocks (if we add them)~~
 
 ## Impact
