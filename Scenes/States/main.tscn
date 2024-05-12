@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://gs2jlmggvj4j"]
+[gd_scene load_steps=15 format=3 uid="uid://gs2jlmggvj4j"]
 
 [ext_resource type="Script" path="res://Scripts/GameManager.cs" id="1_hq04o"]
 [ext_resource type="Script" path="res://Scripts/Camera.cs" id="1_r2bng"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cvqngf3u5s5yd" path="res://Scenes/Entities/Player/Player.tscn" id="3_26y4g"]
 [ext_resource type="FontFile" uid="uid://dsfiogj66lwmu" path="res://Sprites/Fonts/Poco.ttf" id="3_h6kjy"]
 [ext_resource type="PackedScene" uid="uid://b84et206spagb" path="res://Scenes/Entities/Balloon.tscn" id="4_3w46a"]
+[ext_resource type="Script" path="res://Scripts/SceneChanger.cs" id="5_3jpr3"]
 [ext_resource type="Texture2D" uid="uid://434ljf1hjx1s" path="res://Sprites/bg.png" id="5_46cya"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_hmtkr"]
@@ -29,6 +30,7 @@ font_size = 30
 [node name="Cam" type="Camera2D" parent="."]
 anchor_mode = 0
 script = ExtResource("1_r2bng")
+intensityMultiplier = 10.0
 
 [node name="UIView" type="CanvasLayer" parent="."]
 
@@ -174,6 +176,10 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_cdgp2")
 text = "Quit to title"
 flat = true
 
+[node name="SceneChanger" type="Node" parent="UIView/Pause/QuitButton"]
+script = ExtResource("5_3jpr3")
+scenePath = "res://Scenes/States/Menu.tscn"
+
 [node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("spawnTimer", "balloons", "bars", "endGameText")]
 script = ExtResource("1_hq04o")
 spawnTimer = NodePath("SpawnTimer")
@@ -182,9 +188,10 @@ bars = [NodePath("../UIView/UI/BarOne"), NodePath("../UIView/UI/BarTwo"), NodePa
 bird = ExtResource("2_o3rcn")
 birdSpawnArea = Rect2(0, -20, 400, 0)
 endGameText = NodePath("../UIView/UI/EndWarn")
+spawnTimeDecrement = 0.15
 
 [node name="SpawnTimer" type="Timer" parent="GameManager"]
-wait_time = 4.0
+wait_time = 3.0
 autostart = true
 
 [node name="Metres" type="Timer" parent="GameManager"]
@@ -210,9 +217,11 @@ texture = ExtResource("5_46cya")
 centered = false
 
 [connection signal="pressed" from="UIView/Pause/ResumeButton" to="UIView/Pause" method="GameResume"]
+[connection signal="pressed" from="UIView/Pause/QuitButton" to="UIView/Pause" method="GameResume"]
+[connection signal="pressed" from="UIView/Pause/QuitButton" to="UIView/Pause/QuitButton/SceneChanger" method="ChangeScene"]
 [connection signal="timeout" from="GameManager/SpawnTimer" to="GameManager" method="SpawnBird"]
 [connection signal="timeout" from="GameManager/Metres" to="GameManager" method="OnMetreTravelled"]
-[connection signal="Shot" from="Player/Gun" to="Cam" method="Shake" binds= [0.2]]
+[connection signal="Shot" from="Player/Gun" to="Cam" method="Shake" binds= [0.1]]
 
 [editable path="Player"]
 [editable path="Player/Gun"]

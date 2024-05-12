@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dw4pasbgeuym1"]
+[gd_scene load_steps=4 format=3 uid="uid://3s1ssu1f5sdg"]
 
 [ext_resource type="LabelSettings" uid="uid://bv2lp334cqmwh" path="res://Sprites/Themes/BaseFont.tres" id="1_fqdad"]
+[ext_resource type="Theme" uid="uid://bwwwn1t7xj6x8" path="res://theme.tres" id="2_7jwk0"]
+[ext_resource type="Script" path="res://Scripts/SceneChanger.cs" id="3_guk8j"]
 
 [node name="Lose" type="Node2D"]
 
@@ -30,3 +32,18 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Lose."
 label_settings = ExtResource("1_fqdad")
+
+[node name="RetryButton" type="Button" parent="UIView/UI"]
+layout_mode = 0
+offset_left = 342.0
+offset_top = 188.0
+offset_right = 392.0
+offset_bottom = 219.0
+theme = ExtResource("2_7jwk0")
+text = "Retry"
+
+[node name="SceneChanger" type="Node" parent="UIView/UI/RetryButton"]
+script = ExtResource("3_guk8j")
+scenePath = "res://Scenes/States/main.tscn"
+
+[connection signal="pressed" from="UIView/UI/RetryButton" to="UIView/UI/RetryButton/SceneChanger" method="ChangeScene"]

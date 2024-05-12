@@ -19,15 +19,22 @@ public partial class GameManager : Node
 
 	[Export] private Label endGameText;
 
+	[Export] private float spawnTimeDecrement;
+
 	private RandomNumberGenerator rng;
 
 	private int currentBar = 0;
 
 	private int metresTravelled = 0;
 
-	private int birdSpawnChance = 7;
+	private int birdSpawnChance = 5;
 
 	private bool canEndGame = false;
+
+	public override void _ExitTree()
+	{
+		if (GameManager.instance == this) GameManager.instance = null;
+	}
 
 	public override void _Ready()
 	{
@@ -71,7 +78,7 @@ public partial class GameManager : Node
 
 		if (metresTravelled % 30 == 0) {
 			EmitSignal(SignalName.ThirtyMetresTravelled);
-			spawnTimer.WaitTime -= 0.2;
+			spawnTimer.WaitTime -= spawnTimeDecrement;
 		}
 
 		if (metresTravelled % 60 == 0) {
@@ -87,8 +94,8 @@ public partial class GameManager : Node
 			bars[currentBar].Color = new Color("34f35f");
 			currentBar += 1;
 
-			// Cap spawn chance at 1/4
-			if (birdSpawnChance <= 4) return;
+			// Cap spawn chance at 1/2
+			if (birdSpawnChance <= 2) return;
 			birdSpawnChance -= 1;
 		}
 	}
