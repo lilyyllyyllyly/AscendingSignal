@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0bfb2lhekvww"]
+[gd_scene load_steps=6 format=3 uid="uid://c0bfb2lhekvww"]
 
-[ext_resource type="Theme" uid="uid://bwwwn1t7xj6x8" path="res://theme.tres" id="1_5yjne"]
+[ext_resource type="Script" path="res://Scripts/Menu.cs" id="1_2ww00"]
+[ext_resource type="Theme" uid="uid://bwwwn1t7xj6x8" path="res://Sprites/Themes/BaseTheme.tres" id="1_5yjne"]
 [ext_resource type="Script" path="res://Scripts/SceneChanger.cs" id="2_uj307"]
+[ext_resource type="PackedScene" uid="uid://dhwtnopvdnw6o" path="res://Scenes/Props/BalloonProp.tscn" id="2_upvgg"]
+[ext_resource type="Texture2D" uid="uid://434ljf1hjx1s" path="res://Sprites/bg.png" id="5_t6gc5"]
 
-[node name="Menu" type="Node2D"]
+[node name="Menu" type="Node2D" node_paths=PackedStringArray("leftBars", "rightBars")]
+script = ExtResource("1_2ww00")
+balloon = ExtResource("2_upvgg")
+leftBars = [NodePath("UIView/Menu/LeftFour"), NodePath("UIView/Menu/LeftThree"), NodePath("UIView/Menu/LeftTwo"), NodePath("UIView/Menu/LeftOne")]
+rightBars = [NodePath("UIView/Menu/RightFour"), NodePath("UIView/Menu/RightThree"), NodePath("UIView/Menu/RightTwo"), NodePath("UIView/Menu/RightOne")]
 
 [node name="UIView" type="CanvasLayer" parent="."]
 
@@ -39,9 +46,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -18.0
-offset_top = -12.0
+offset_top = -11.5
 offset_right = 18.0
-offset_bottom = 12.0
+offset_bottom = 12.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_5yjne")
@@ -51,19 +58,120 @@ text = "Play"
 script = ExtResource("2_uj307")
 scenePath = "res://Scenes/States/main.tscn"
 
-[node name="Credits" type="Label" parent="UIView/Menu"]
+[node name="Options" type="Button" parent="UIView/Menu"]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = -30.0
-offset_right = 143.0
-offset_bottom = -3.0
-grow_vertical = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = 19.5
+offset_right = 31.0
+offset_bottom = 43.5
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_5yjne")
-theme_override_font_sizes/font_size = 10
-text = "Made by Lilliana and Evelyn
-Font: Poco from fontenddev.com"
+text = "Options"
+
+[node name="SceneChanger" type="Node" parent="UIView/Menu/Options"]
+script = ExtResource("2_uj307")
+scenePath = "res://Scenes/States/Settings.tscn"
+
+[node name="Exit" type="Button" parent="UIView/Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.0
+offset_top = 48.5
+offset_right = 69.0
+offset_bottom = 72.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_5yjne")
+text = "Quit to Desktop"
+
+[node name="LeftOne" type="ColorRect" parent="UIView/Menu"]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 38.0
+offset_right = 88.0
+offset_bottom = 53.0
+color = Color(0.61339, 0.61339, 0.61339, 1)
+
+[node name="LeftTwo" type="ColorRect" parent="UIView/Menu"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 41.0
+offset_right = 82.0
+offset_bottom = 53.0
+color = Color(0.61339, 0.61339, 0.61339, 1)
+
+[node name="LeftThree" type="ColorRect" parent="UIView/Menu"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 44.0
+offset_right = 76.0
+offset_bottom = 53.0
+color = Color(0.61339, 0.61339, 0.61339, 1)
+
+[node name="LeftFour" type="ColorRect" parent="UIView/Menu"]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 47.0
+offset_right = 70.0
+offset_bottom = 53.0
+color = Color(0.61339, 0.61339, 0.61339, 1)
+
+[node name="RightOne" type="ColorRect" parent="UIView/Menu"]
+layout_mode = 0
+offset_left = 309.04
+offset_top = 38.0
+offset_right = 313.04
+offset_bottom = 54.0
+color = Color(0.61339, 0.61339, 0.61339, 1)
+
+[node name="RightTwo" type="ColorRect" parent="UIView/Menu"]
+layout_mode = 0
+offset_left = 315.04
+offset_top = 41.0
+offset_right = 319.04
+offset_bottom = 54.0
+color = Color(0.61339, 0.61339, 0.61339, 1)
+
+[node name="RightThree" type="ColorRect" parent="UIView/Menu"]
+layout_mode = 0
+offset_left = 321.04
+offset_top = 44.0
+offset_right = 325.04
+offset_bottom = 54.0
+color = Color(0.61339, 0.61339, 0.61339, 1)
+
+[node name="RightFour" type="ColorRect" parent="UIView/Menu"]
+layout_mode = 0
+offset_left = 327.0
+offset_top = 47.0
+offset_right = 331.0
+offset_bottom = 54.0
+color = Color(0.61339, 0.61339, 0.61339, 1)
+
+[node name="BalloonSpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="SignalFill" type="Timer" parent="."]
+autostart = true
+
+[node name="BackDrop" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.407843)
+z_index = -100
+texture = ExtResource("5_t6gc5")
+centered = false
 
 [connection signal="pressed" from="UIView/Menu/PlayButton" to="UIView/Menu/PlayButton/SceneChanger" method="ChangeScene"]
+[connection signal="pressed" from="UIView/Menu/Options" to="UIView/Menu/Options/SceneChanger" method="ChangeScene"]
+[connection signal="pressed" from="UIView/Menu/Exit" to="." method="EndGame"]
+[connection signal="timeout" from="BalloonSpawnTimer" to="." method="SpawnBalloon"]
+[connection signal="timeout" from="SignalFill" to="." method="FillBar"]

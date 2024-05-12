@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://3s1ssu1f5sdg"]
 
 [ext_resource type="LabelSettings" uid="uid://bv2lp334cqmwh" path="res://Sprites/Themes/BaseFont.tres" id="1_fqdad"]
-[ext_resource type="Theme" uid="uid://bwwwn1t7xj6x8" path="res://theme.tres" id="2_7jwk0"]
+[ext_resource type="Theme" uid="uid://bwwwn1t7xj6x8" path="res://Sprites/Themes/BaseTheme.tres" id="2_7jwk0"]
 [ext_resource type="Script" path="res://Scripts/SceneChanger.cs" id="3_guk8j"]
 [ext_resource type="AudioStream" uid="uid://dhjkf0w43k5du" path="res://Sounds/lose.wav" id="4_jxrqy"]
 

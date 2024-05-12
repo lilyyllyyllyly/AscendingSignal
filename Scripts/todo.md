@@ -13,7 +13,7 @@
 ## Art/Visual
 - Make balloons fall instead of disappear
 - Show balloon health visually (or at least make health text more visible)
-- Better background (parallax and stuff, maybe bigger too)
+- Better background (parallax and stuff, maybe bigger too) (it's a static background -eve)
 - Clouds that fly by
 - Little phone next to signal text
 - ~~Rocks (if we add them)~~
@@ -46,4 +46,7 @@
 - ~~Pause~~
 - ~~Win~~
 - ~~Lose~~
+
+- ~~Make Menu presentable.~~
+- Add options menu with credits.
 

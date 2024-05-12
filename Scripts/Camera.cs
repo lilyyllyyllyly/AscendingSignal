@@ -8,7 +8,8 @@ public partial class Camera : Camera2D
 
 	public void Shake(float intensity)
 	{
-		currentIntensity = intensity;
+		if (Saves.WantsScreenShake)
+			currentIntensity = intensity;
 	}
 
 	public override void _Process(double delta)

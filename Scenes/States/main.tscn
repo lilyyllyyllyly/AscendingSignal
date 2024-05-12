@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://gs2jlmggvj4j"]
+[gd_scene load_steps=17 format=3 uid="uid://gs2jlmggvj4j"]
 
 [ext_resource type="Script" path="res://Scripts/GameManager.cs" id="1_hq04o"]
 [ext_resource type="Script" path="res://Scripts/Camera.cs" id="1_r2bng"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://b84et206spagb" path="res://Scenes/Entities/Balloon.tscn" id="4_3w46a"]
 [ext_resource type="Script" path="res://Scripts/SceneChanger.cs" id="5_3jpr3"]
 [ext_resource type="Texture2D" uid="uid://434ljf1hjx1s" path="res://Sprites/bg.png" id="5_46cya"]
-[ext_resource type="PackedScene" uid="uid://b773hboobembd" path="res://Scenes/Entities/RockSpawner.tscn" id="8_ny5gd"]
 [ext_resource type="AudioStream" uid="uid://b08087faj4rh0" path="res://Sounds/win.wav" id="8_pypci"]
 [ext_resource type="Script" path="res://Scripts/PlaySound.cs" id="9_jjnjt"]
 
@@ -183,7 +182,7 @@ flat = true
 script = ExtResource("5_3jpr3")
 scenePath = "res://Scenes/States/Menu.tscn"
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("spawnTimer", "balloons", "bars", "endGameText", "rockTimer", "player")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("spawnTimer", "balloons", "bars", "endGameText")]
 script = ExtResource("1_hq04o")
 spawnTimer = NodePath("SpawnTimer")
 balloons = [NodePath("../Balloon/Balloon"), NodePath("../Balloon2/Balloon"), NodePath("../Balloon3/Balloon")]
@@ -191,13 +190,8 @@ bars = [NodePath("../UIView/UI/BarOne"), NodePath("../UIView/UI/BarTwo"), NodePa
 bird = ExtResource("2_o3rcn")
 birdSpawnArea = Rect2(0, -20, 400, 0)
 endGameText = NodePath("../UIView/UI/EndWarn")
-spawnTimeDecrement = 0.1
-rockSpawner = ExtResource("8_ny5gd")
-rockSpawnArea = Rect2(32, 20, 336, 0)
-rockSpawnPlayerRange = 60.0
-rockTimer = NodePath("RockSpawnTimer")
-rockSpawnTimeDecrement = 0.25
-player = NodePath("../Player")
+spawnTimeDecrement = 0.2
+rockSpawnArea = Rect2(0, 0, 400, 0)
 
 [node name="RockSpawnTimer" type="Timer" parent="GameManager"]
 wait_time = 5.0
@@ -237,7 +231,6 @@ centered = false
 [connection signal="pressed" from="UIView/Pause/ResumeButton" to="UIView/Pause" method="GameResume"]
 [connection signal="pressed" from="UIView/Pause/QuitButton" to="UIView/Pause" method="GameResume"]
 [connection signal="pressed" from="UIView/Pause/QuitButton" to="UIView/Pause/QuitButton/SceneChanger" method="ChangeScene"]
-[connection signal="Won" from="GameManager" to="GameManager/PlaySound" method="PlayAudio"]
 [connection signal="timeout" from="GameManager/RockSpawnTimer" to="GameManager" method="SpawnRock"]
 [connection signal="timeout" from="GameManager/SpawnTimer" to="GameManager" method="SpawnBird"]
 [connection signal="timeout" from="GameManager/Metres" to="GameManager" method="OnMetreTravelled"]

@@ -15,10 +15,15 @@ run/main_scene="res://Scenes/States/Menu.tscn"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Saves="*res://Scripts/Saves.cs"
+
 [display]
 
 window/size/viewport_width=400
 window/size/viewport_height=225
+window/size/mode=2
 window/stretch/mode="viewport"
 window/canvas_textures/default_texture_filter=0
 

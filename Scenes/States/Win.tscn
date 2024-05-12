@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dj5fk388h5m3l"]
 
 [ext_resource type="LabelSettings" uid="uid://bv2lp334cqmwh" path="res://Sprites/Themes/BaseFont.tres" id="1_i68fg"]
-[ext_resource type="Theme" uid="uid://bwwwn1t7xj6x8" path="res://theme.tres" id="2_7wwdo"]
+[ext_resource type="Theme" uid="uid://bwwwn1t7xj6x8" path="res://Sprites/Themes/BaseTheme.tres" id="2_7wwdo"]
 [ext_resource type="Script" path="res://Scripts/SceneChanger.cs" id="3_usvoo"]
 
 [node name="Win" type="Node2D"]

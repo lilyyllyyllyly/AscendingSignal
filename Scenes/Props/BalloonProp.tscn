@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhwtnopvdnw6o"]
+
+[ext_resource type="Script" path="res://Scripts/BalloonProp.cs" id="1_fdn3h"]
+[ext_resource type="Texture2D" uid="uid://d4cvs34u7tawp" path="res://Sprites/balloon.png" id="2_btf0h"]
+
+[node name="BalloonProp" type="Node2D" node_paths=PackedStringArray("sprite")]
+position = Vector2(196, 112)
+script = ExtResource("1_fdn3h")
+sprite = NodePath("Sprite2D")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_btf0h")
