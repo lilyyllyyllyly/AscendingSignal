@@ -1,46 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://jiigd5ymwdlu"]
+[gd_scene load_steps=9 format=3 uid="uid://bhrp7af5arop3"]
 
 [ext_resource type="Script" path="res://Scripts/Settings.cs" id="1_a41yy"]
 [ext_resource type="LabelSettings" uid="uid://bv2lp334cqmwh" path="res://Sprites/Themes/BaseFont.tres" id="1_j5556"]
 [ext_resource type="FontFile" uid="uid://dsfiogj66lwmu" path="res://Sprites/Fonts/Poco.ttf" id="2_av4w8"]
-[ext_resource type="Theme" uid="uid://bwwwn1t7xj6x8" path="res://Sprites/Themes/BaseTheme.tres" id="2_hysou"]
-[ext_resource type="Texture2D" uid="uid://dy0f83yxrky3l" path="res://Sprites/Themes/UIElements/BoxChecked-export.png" id="3_mg6q1"]
-[ext_resource type="Texture2D" uid="uid://48us54f2rfgp" path="res://Sprites/Themes/UIElements/BoxUnchecked-export.png" id="4_bydej"]
+[ext_resource type="Theme" path="res://Sprites/Themes/BaseTheme.tres" id="2_csq4p"]
 [ext_resource type="Script" path="res://Scripts/SceneChanger.cs" id="7_motsv"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v0nbv"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uj8jt"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mvttk"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bv8if"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_44ubv"]
-
-[sub_resource type="Theme" id="Theme_wm4op"]
-Button/colors/font_color = Color(1, 1, 1, 1)
-Button/colors/font_hover_color = Color(0.898039, 1, 0.682353, 1)
-Button/colors/font_pressed_color = Color(0.796078, 0.992157, 0, 1)
-Button/font_sizes/font_size = 20
-Button/fonts/font = ExtResource("2_av4w8")
-Button/styles/disabled = SubResource("StyleBoxEmpty_v0nbv")
-Button/styles/focus = SubResource("StyleBoxEmpty_uj8jt")
-Button/styles/hover = SubResource("StyleBoxEmpty_mvttk")
-Button/styles/normal = SubResource("StyleBoxEmpty_bv8if")
-Button/styles/pressed = SubResource("StyleBoxEmpty_44ubv")
-CheckBox/colors/font_color = Color(0.875, 0.875, 0.875, 1)
-CheckBox/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
-CheckBox/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
-CheckBox/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
-CheckBox/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-CheckBox/colors/font_outline_color = Color(1, 1, 1, 1)
-CheckBox/colors/font_pressed_color = Color(1, 1, 1, 1)
-CheckBox/font_sizes/font_size = 17
-CheckBox/icons/checked = ExtResource("3_mg6q1")
-CheckBox/icons/unchecked = ExtResource("4_bydej")
-Label/font_sizes/font_size = 20
-Label/fonts/font = ExtResource("2_av4w8")
 
 [sub_resource type="LabelSettings" id="LabelSettings_pgc4r"]
 font = ExtResource("2_av4w8")
@@ -68,6 +32,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_csq4p")
 metadata/_edit_use_anchors_ = true
 
 [node name="SettingsBackground" type="ColorRect" parent="CanvasLayer/Control"]
@@ -77,6 +42,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_csq4p")
 color = Color(0, 0, 0, 0.560784)
 metadata/_edit_use_anchors_ = true
 
@@ -90,6 +56,7 @@ offset_top = 27.88
 offset_right = 57.0
 offset_bottom = 51.88
 grow_horizontal = 2
+theme = ExtResource("2_csq4p")
 text = "Game Options"
 label_settings = ExtResource("1_j5556")
 
@@ -99,7 +66,7 @@ offset_left = 18.0
 offset_top = 82.0
 offset_right = 38.0
 offset_bottom = 99.0
-theme = SubResource("Theme_wm4op")
+theme = ExtResource("2_csq4p")
 text = "
 "
 
@@ -109,6 +76,7 @@ offset_left = 22.0
 offset_top = -7.0
 offset_right = 110.0
 offset_bottom = 17.0
+theme = ExtResource("2_csq4p")
 text = "Fullscreen"
 
 [node name="Shake" type="CheckBox" parent="CanvasLayer/Control"]
@@ -117,7 +85,7 @@ offset_left = 18.0
 offset_top = 106.0
 offset_right = 38.0
 offset_bottom = 127.0
-theme = SubResource("Theme_wm4op")
+theme = ExtResource("2_csq4p")
 text = "
 "
 
@@ -127,6 +95,7 @@ offset_left = 22.0
 offset_top = -7.0
 offset_right = 110.0
 offset_bottom = 17.0
+theme = ExtResource("2_csq4p")
 text = "Screen Shake"
 
 [node name="Credits Master" type="Label" parent="CanvasLayer/Control"]
@@ -135,6 +104,7 @@ offset_left = 289.0
 offset_top = 66.0
 offset_right = 349.0
 offset_bottom = 90.0
+theme = ExtResource("2_csq4p")
 text = "Credits"
 label_settings = ExtResource("1_j5556")
 
@@ -144,6 +114,7 @@ offset_left = -31.0
 offset_top = 24.0
 offset_right = 98.0
 offset_bottom = 47.0
+theme = ExtResource("2_csq4p")
 text = "Programming Lilliana & Evelyn"
 label_settings = SubResource("LabelSettings_pgc4r")
 
@@ -153,6 +124,7 @@ offset_left = -31.0
 offset_top = 36.0
 offset_right = 53.0
 offset_bottom = 59.0
+theme = ExtResource("2_csq4p")
 text = "Art & sprites Lilliana"
 label_settings = SubResource("LabelSettings_ek2a1")
 
@@ -162,6 +134,7 @@ offset_left = 28.0
 offset_top = 126.0
 offset_right = 107.0
 offset_bottom = 153.0
+theme = ExtResource("2_csq4p")
 text = "Powered by godot
 Licensed by MIT"
 label_settings = SubResource("LabelSettings_emf5u")
@@ -172,7 +145,7 @@ offset_left = 11.0
 offset_top = 191.0
 offset_right = 99.0
 offset_bottom = 215.0
-theme = ExtResource("2_hysou")
+theme = ExtResource("2_csq4p")
 text = "Main Menu"
 
 [node name="SceneChanger" type="Node" parent="CanvasLayer/Control/MainMenu"]
