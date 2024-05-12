@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://3s1ssu1f5sdg"]
+[gd_scene load_steps=5 format=3 uid="uid://3s1ssu1f5sdg"]
 
 [ext_resource type="LabelSettings" uid="uid://bv2lp334cqmwh" path="res://Sprites/Themes/BaseFont.tres" id="1_fqdad"]
 [ext_resource type="Theme" uid="uid://bwwwn1t7xj6x8" path="res://theme.tres" id="2_7jwk0"]
 [ext_resource type="Script" path="res://Scripts/SceneChanger.cs" id="3_guk8j"]
+[ext_resource type="AudioStream" uid="uid://dhjkf0w43k5du" path="res://Sounds/lose.wav" id="4_jxrqy"]
 
 [node name="Lose" type="Node2D"]
 
@@ -46,4 +47,27 @@ text = "Retry"
 script = ExtResource("3_guk8j")
 scenePath = "res://Scenes/States/main.tscn"
 
+[node name="MenuButton" type="Button" parent="UIView/UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -34.0
+offset_right = 96.0
+offset_bottom = -3.0
+grow_vertical = 0
+theme = ExtResource("2_7jwk0")
+text = "Return to menu"
+
+[node name="SceneChanger" type="Node" parent="UIView/UI/MenuButton"]
+script = ExtResource("3_guk8j")
+scenePath = "res://Scenes/States/Menu.tscn"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_jxrqy")
+volume_db = -5.0
+autoplay = true
+
 [connection signal="pressed" from="UIView/UI/RetryButton" to="UIView/UI/RetryButton/SceneChanger" method="ChangeScene"]
+[connection signal="pressed" from="UIView/UI/MenuButton" to="UIView/UI/MenuButton/SceneChanger" method="ChangeScene"]

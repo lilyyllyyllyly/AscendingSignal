@@ -6,6 +6,7 @@ public partial class GameManager : Node
 {
 	[Signal] public delegate void ThirtyMetresTravelledEventHandler();
 	[Signal] public delegate void SixtyMetresTravelledEventHandler();
+	[Signal] public delegate void WonEventHandler();
 
 	public static GameManager instance;
 
@@ -87,6 +88,8 @@ public partial class GameManager : Node
 			if (currentBar > bars.Length - 1) return;
 
 			if (currentBar == bars.Length - 1) {
+				if (!canEndGame) EmitSignal(SignalName.Won);
+
 				canEndGame = true;
 				endGameText.Visible = true;
 			}

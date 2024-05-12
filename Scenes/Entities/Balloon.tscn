@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b84et206spagb"]
+[gd_scene load_steps=15 format=3 uid="uid://b84et206spagb"]
 
 [ext_resource type="Script" path="res://Scripts/Balloon.cs" id="2_17alc"]
 [ext_resource type="Texture2D" uid="uid://d4cvs34u7tawp" path="res://Sprites/balloon.png" id="2_uesl4"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://whm5xypshs76" path="res://Sprites/Fire/fire1.png" id="4_j1gx1"]
 [ext_resource type="Texture2D" uid="uid://qu7jyoiabmbc" path="res://Sprites/Fire/fire2.png" id="5_0mhy2"]
 [ext_resource type="LabelSettings" uid="uid://bv2lp334cqmwh" path="res://Sprites/Themes/BaseFont.tres" id="6_7slk2"]
+[ext_resource type="AudioStream" uid="uid://c4ue3exdvkyr3" path="res://Sounds/balloon_hit.wav" id="7_aoocm"]
+[ext_resource type="Script" path="res://Scripts/PlaySound.cs" id="8_xbnyy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o4f5q"]
 size = Vector2(64, 16)
@@ -141,3 +143,11 @@ offset_right = 24.0
 offset_bottom = 34.0
 text = "10 HP"
 label_settings = ExtResource("6_7slk2")
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_aoocm")
+volume_db = -5.0
+script = ExtResource("8_xbnyy")
+pitchRange = 0.3
+
+[connection signal="TakeHit" from="Balloon" to="HitSound" method="PlayAudio"]

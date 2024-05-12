@@ -46,4 +46,22 @@ text = "Play Again"
 script = ExtResource("3_usvoo")
 scenePath = "res://Scenes/States/main.tscn"
 
+[node name="MenuButton" type="Button" parent="UIView/UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -34.0
+offset_right = 96.0
+offset_bottom = -3.0
+grow_vertical = 0
+theme = ExtResource("2_7wwdo")
+text = "Return to menu"
+
+[node name="SceneChanger" type="Node" parent="UIView/UI/MenuButton"]
+script = ExtResource("3_usvoo")
+scenePath = "res://Scenes/States/Menu.tscn"
+
 [connection signal="pressed" from="UIView/UI/PlayAgainButton" to="UIView/UI/PlayAgainButton/SceneChanger" method="ChangeScene"]
+[connection signal="pressed" from="UIView/UI/MenuButton" to="UIView/UI/MenuButton/SceneChanger" method="ChangeScene"]

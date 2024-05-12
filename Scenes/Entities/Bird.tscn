@@ -59,7 +59,7 @@ script = ExtResource("1_kmd30")
 speed = 50.0
 accel = 100.0
 stopDist = 30.0
-maxHealth = 1.0
+maxHealth = 2.0
 anim = NodePath("AnimationPlayer")
 slash = ExtResource("2_wcwbh")
 

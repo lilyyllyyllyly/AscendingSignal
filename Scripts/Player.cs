@@ -3,6 +3,8 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
+	[Signal] public delegate void LandEventHandler();
+
 	private readonly float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
 	[Export] private float speed =  500;
@@ -20,16 +22,26 @@ public partial class Player : CharacterBody2D
 
 	[Export] private AnimationPlayer anim;
 
+	[Signal] public delegate void JumpStartedEventHandler();
+
+	[Export] private float shootSlowTime = 0.3f;
+	private float lastSlow;
+
 	public override void _PhysicsProcess(double delta)
 	{
 		float now = Time.GetTicksMsec();
+
+		if (Input.IsActionPressed("fire")) lastSlow = now;
 
 		// Horizontal Movement
 		float direction = Input.GetAxis("left", "right");
 		if (direction != 0) anim.Play("walk");
 		else anim.Play("idle");
 
-		float goalVel = direction * speed;
+		float realSpeed = speed;
+		if (now - lastSlow < shootSlowTime) realSpeed = speed/2;
+
+		float goalVel = direction * realSpeed;
 
 		float maxMove = accel;
 		if (Mathf.Sign(direction) != 0 && Mathf.Sign(direction) != Mathf.Sign(Velocity.X)) {
@@ -45,6 +57,7 @@ public partial class Player : CharacterBody2D
 			yMove = Velocity.Y + gravity * (float)delta;
 			anim.Play("jump");
 		} else {
+			if (jumpsLeft < jumpsMax) EmitSignal(SignalName.Land);
 			jumpsLeft = jumpsMax;
 		}
 
@@ -54,6 +67,8 @@ public partial class Player : CharacterBody2D
 			jumping = true;
 			jumpStart = now;
 			--jumpsLeft;
+
+			EmitSignal(SignalName.JumpStarted);
 		}
 
 		if (Input.IsActionPressed("jump") && jumping) {

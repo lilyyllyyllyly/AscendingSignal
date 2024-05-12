@@ -1,9 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://cvqngf3u5s5yd"]
+[gd_scene load_steps=14 format=3 uid="uid://cvqngf3u5s5yd"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_0mpj3"]
 [ext_resource type="Texture2D" uid="uid://bflo6ksu58eli" path="res://Sprites/Player/player1.png" id="2_y0jmv"]
 [ext_resource type="Texture2D" uid="uid://bwcp7foiy47j6" path="res://Sprites/Player/player2.png" id="3_2s2bv"]
 [ext_resource type="PackedScene" uid="uid://w7jh73mivvd4" path="res://Scenes/Entities/Player/Gun/Gun.tscn" id="3_xfd15"]
+[ext_resource type="AudioStream" uid="uid://brnb52b32lbng" path="res://Sounds/jump.wav" id="5_noln6"]
+[ext_resource type="Script" path="res://Scripts/PlaySound.cs" id="6_x3501"]
+[ext_resource type="AudioStream" uid="uid://cmsvcuq4ns6g4" path="res://Scripts/step.wav" id="7_d3d3i"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s2rt8"]
 radius = 4.0
@@ -70,6 +73,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [ExtResource("2_y0jmv"), ExtResource("3_2s2bv")]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StepSound")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"PlayAudio"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k56dw"]
 _data = {
@@ -87,6 +104,7 @@ accel = 500.0
 jumpForce = -180.0
 jumpHold = 150.0
 anim = NodePath("AnimationPlayer")
+shootSlowTime = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 top_level = true
@@ -102,3 +120,18 @@ libraries = {
 
 [node name="Gun" parent="." instance=ExtResource("3_xfd15")]
 position = Vector2(2, 2)
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_noln6")
+volume_db = -5.0
+script = ExtResource("6_x3501")
+pitchRange = 0.2
+
+[node name="StepSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_d3d3i")
+volume_db = -10.0
+script = ExtResource("6_x3501")
+pitchRange = 0.4
+
+[connection signal="JumpStarted" from="." to="JumpSound" method="PlayAudio"]
+[connection signal="Land" from="." to="StepSound" method="PlayAudio"]

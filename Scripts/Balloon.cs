@@ -3,8 +3,21 @@ using System;
 
 public partial class Balloon : Node2D
 {
+	[Signal] public delegate void TakeHitEventHandler();
+
 	[Export] private float maxHealth = 10;
-	public float health;
+	private float _health;
+
+	public float health {
+		get {
+			return _health;
+		}
+
+		set {
+			if (value < _health) EmitSignal(SignalName.TakeHit);
+			_health = value;
+		}
+	}
 
 	[Export] private AnimationPlayer anim;
 	[Export] private AnimationPlayer fireAnim;
@@ -25,7 +38,7 @@ public partial class Balloon : Node2D
 	public override void _Process(double delta)
 	{
 		textHP.Text = $"{health} HP";
-		if (health <= 0) {
+		if (_health <= 0) {
 			GetNode("..").QueueFree();
 		}
 	}
