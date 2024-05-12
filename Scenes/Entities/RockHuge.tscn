@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://db5cqfl42sast"]
+
+[ext_resource type="Script" path="res://Scripts/Rock.cs" id="1_m3ior"]
+[ext_resource type="Texture2D" uid="uid://dpnm65djv2333" path="res://Sprites/rock-huge.png" id="2_ex012"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xakbu"]
+radius = 22.0
+
+[node name="RockBig" type="Node2D"]
+script = ExtResource("1_m3ior")
+speed = 125.0
+lifetime = 3.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ex012")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_xakbu")

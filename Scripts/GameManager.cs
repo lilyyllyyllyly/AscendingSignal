@@ -22,6 +22,13 @@ public partial class GameManager : Node
 
 	[Export] private float spawnTimeDecrement;
 
+	[Export] private PackedScene[] rocks;
+	[Export] private float rockSpawnPlayerRange;
+	[Export] private Timer rockTimer;
+	[Export] private float rockSpawnTimeDecrement;
+
+	[Export] private Node2D player;
+
 	private RandomNumberGenerator rng;
 
 	private int currentBar = 0;
@@ -74,12 +81,37 @@ public partial class GameManager : Node
 		}
 	}
 
+	private void SetRock(bool second) {
+		Node2D newRock = (Node2D)rocks[Random.Shared.Next(0, rocks.Length)].Instantiate();
+		GetTree().CurrentScene.AddChild(newRock);
+
+		float posX, posY;
+		int r = Random.Shared.Next(0, 3);
+		if (r == 0) { // either same area as birds
+			posX = rng.RandfRange(birdSpawnArea.Position.X, birdSpawnArea.Position.X + birdSpawnArea.Size.X);
+			posY = rng.RandfRange(birdSpawnArea.Position.Y, birdSpawnArea.Position.Y + birdSpawnArea.Size.Y);
+		} else { // or near the player
+			posX = player.GlobalPosition.X + (Random.Shared.NextSingle() - 0.5f) * rockSpawnPlayerRange;
+			posY = rng.RandfRange(birdSpawnArea.Position.Y, birdSpawnArea.Position.Y + birdSpawnArea.Size.Y);
+		}
+
+		newRock.GlobalPosition = new Vector2(posX, second? posY - 20 : posY); // hardcoded af second rock should be higher if 2 spawn (so they dont look super synced)
+	}
+
+	public void SpawnRock() {
+		SetRock(false);
+		if (Random.Shared.Next(0, birdSpawnChance) == birdSpawnChance - 1) { // reusing birdSpawnChance cuz i cant be asked
+			SetRock(true);
+		}
+	}
+
 	private void OnMetreTravelled() {
 		metresTravelled += 1;
 
 		if (metresTravelled % 30 == 0) {
 			EmitSignal(SignalName.ThirtyMetresTravelled);
 			spawnTimer.WaitTime -= spawnTimeDecrement;
+			rockTimer.WaitTime -= rockSpawnTimeDecrement;
 		}
 
 		if (metresTravelled % 60 == 0) {

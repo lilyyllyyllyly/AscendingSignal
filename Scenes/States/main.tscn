@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://gs2jlmggvj4j"]
+[gd_scene load_steps=20 format=3 uid="uid://gs2jlmggvj4j"]
 
 [ext_resource type="Script" path="res://Scripts/GameManager.cs" id="1_hq04o"]
 [ext_resource type="Script" path="res://Scripts/Camera.cs" id="1_r2bng"]
@@ -10,8 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://b84et206spagb" path="res://Scenes/Entities/Balloon.tscn" id="4_3w46a"]
 [ext_resource type="Script" path="res://Scripts/SceneChanger.cs" id="5_3jpr3"]
 [ext_resource type="Texture2D" uid="uid://434ljf1hjx1s" path="res://Sprites/bg.png" id="5_46cya"]
+[ext_resource type="PackedScene" uid="uid://cdglubk1sredt" path="res://Scenes/Entities/RockSmall.tscn" id="8_hv208"]
 [ext_resource type="AudioStream" uid="uid://b08087faj4rh0" path="res://Sounds/win.wav" id="8_pypci"]
 [ext_resource type="Script" path="res://Scripts/PlaySound.cs" id="9_jjnjt"]
+[ext_resource type="PackedScene" uid="uid://icuiw3fo1fk3" path="res://Scenes/Entities/RockBig.tscn" id="9_mlu0c"]
+[ext_resource type="PackedScene" uid="uid://db5cqfl42sast" path="res://Scenes/Entities/RockHuge.tscn" id="10_r222u"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_hmtkr"]
 line_spacing = 1.0
@@ -182,7 +185,7 @@ flat = true
 script = ExtResource("5_3jpr3")
 scenePath = "res://Scenes/States/Menu.tscn"
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("spawnTimer", "balloons", "bars", "endGameText")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("spawnTimer", "balloons", "bars", "endGameText", "rockTimer", "player")]
 script = ExtResource("1_hq04o")
 spawnTimer = NodePath("SpawnTimer")
 balloons = [NodePath("../Balloon/Balloon"), NodePath("../Balloon2/Balloon"), NodePath("../Balloon3/Balloon")]
@@ -190,14 +193,23 @@ bars = [NodePath("../UIView/UI/BarOne"), NodePath("../UIView/UI/BarTwo"), NodePa
 bird = ExtResource("2_o3rcn")
 birdSpawnArea = Rect2(0, -20, 400, 0)
 endGameText = NodePath("../UIView/UI/EndWarn")
-spawnTimeDecrement = 0.15
+spawnTimeDecrement = 0.1
+rocks = Array[PackedScene]([ExtResource("8_hv208"), ExtResource("9_mlu0c"), ExtResource("10_r222u")])
+rockSpawnPlayerRange = 60.0
+rockTimer = NodePath("RockSpawnTimer")
+rockSpawnTimeDecrement = 0.25
+player = NodePath("../Player")
+
+[node name="RockSpawnTimer" type="Timer" parent="GameManager"]
+wait_time = 5.0
+autostart = true
 
 [node name="SpawnTimer" type="Timer" parent="GameManager"]
-wait_time = 2.5
+wait_time = 2.3
 autostart = true
 
 [node name="Metres" type="Timer" parent="GameManager"]
-wait_time = 0.6
+wait_time = 0.4
 autostart = true
 
 [node name="PlaySound" type="AudioStreamPlayer" parent="GameManager"]
@@ -227,6 +239,7 @@ centered = false
 [connection signal="pressed" from="UIView/Pause/QuitButton" to="UIView/Pause" method="GameResume"]
 [connection signal="pressed" from="UIView/Pause/QuitButton" to="UIView/Pause/QuitButton/SceneChanger" method="ChangeScene"]
 [connection signal="Won" from="GameManager" to="GameManager/PlaySound" method="PlayAudio"]
+[connection signal="timeout" from="GameManager/RockSpawnTimer" to="GameManager" method="SpawnRock"]
 [connection signal="timeout" from="GameManager/SpawnTimer" to="GameManager" method="SpawnBird"]
 [connection signal="timeout" from="GameManager/Metres" to="GameManager" method="OnMetreTravelled"]
 [connection signal="Shot" from="Player/Gun" to="Cam" method="Shake" binds= [0.1]]

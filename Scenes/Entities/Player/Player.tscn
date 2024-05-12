@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cvqngf3u5s5yd"]
+[gd_scene load_steps=16 format=3 uid="uid://cvqngf3u5s5yd"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_0mpj3"]
 [ext_resource type="Texture2D" uid="uid://bflo6ksu58eli" path="res://Sprites/Player/player1.png" id="2_y0jmv"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://brnb52b32lbng" path="res://Sounds/jump.wav" id="5_noln6"]
 [ext_resource type="Script" path="res://Scripts/PlaySound.cs" id="6_x3501"]
 [ext_resource type="AudioStream" uid="uid://cmsvcuq4ns6g4" path="res://Scripts/step.wav" id="7_d3d3i"]
+[ext_resource type="Script" path="res://Scripts/SceneChanger.cs" id="8_7fjfx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s2rt8"]
 radius = 4.0
@@ -96,6 +97,9 @@ _data = {
 "walk": SubResource("Animation_8pt3v")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kdcyw"]
+size = Vector2(6, 2)
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim")]
 collision_layer = 2
 script = ExtResource("1_0mpj3")
@@ -133,5 +137,18 @@ volume_db = -10.0
 script = ExtResource("6_x3501")
 pitchRange = 0.4
 
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_kdcyw")
+
+[node name="SceneChanger" type="Node" parent="Area2D"]
+script = ExtResource("8_7fjfx")
+scenePath = "res://Scenes/States/Lose.tscn"
+
 [connection signal="JumpStarted" from="." to="JumpSound" method="PlayAudio"]
 [connection signal="Land" from="." to="StepSound" method="PlayAudio"]
+[connection signal="area_entered" from="Area2D" to="Area2D/SceneChanger" method="ChangeScene" unbinds=1]
