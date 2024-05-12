@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://140pyjbhucgw"]
+[gd_scene load_steps=14 format=3 uid="uid://140pyjbhucgw"]
 
 [ext_resource type="Script" path="res://Scripts/Bird.cs" id="1_kmd30"]
 [ext_resource type="Texture2D" uid="uid://ccn4jpshofwyh" path="res://Sprites/Bird/bird1.png" id="2_kbpwc"]
 [ext_resource type="PackedScene" uid="uid://bih5givnor4x0" path="res://Scenes/Effects/Slash.tscn" id="2_wcwbh"]
 [ext_resource type="Texture2D" uid="uid://vfplxv7poo5w" path="res://Sprites/Bird/bird2.png" id="3_ryuve"]
+[ext_resource type="Script" path="res://Scripts/Flash.cs" id="4_l2i3o"]
 [ext_resource type="Texture2D" uid="uid://hcxloilaoc1x" path="res://Sprites/Bird/bird3.png" id="4_l5gae"]
+[ext_resource type="Material" uid="uid://47he61dh7l7w" path="res://Sprites/Shaders/flash.tres" id="5_4avqp"]
 [ext_resource type="Texture2D" uid="uid://os0fmttonq2r" path="res://Sprites/Bird/bird4.png" id="5_lqkec"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7xo2u"]
@@ -69,6 +71,8 @@ shape = SubResource("CircleShape2D_7xo2u")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_kbpwc")
+script = ExtResource("4_l2i3o")
+flashMaterial = ExtResource("5_4avqp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -82,4 +86,5 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_wfdd8")
 
+[connection signal="OnHit" from="." to="Sprite2D" method="StartFlash"]
 [connection signal="area_entered" from="Area2D" to="." method="Hit" unbinds=1]

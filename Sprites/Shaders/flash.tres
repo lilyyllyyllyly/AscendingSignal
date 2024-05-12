@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://47he61dh7l7w"]
+
+[ext_resource type="Shader" path="res://Sprites/Shaders/flash.gdshader" id="1_cpqqo"]
+
+[resource]
+shader = ExtResource("1_cpqqo")

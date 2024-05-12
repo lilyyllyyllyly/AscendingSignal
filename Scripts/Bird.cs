@@ -3,6 +3,8 @@ using System;
 
 public partial class Bird : CharacterBody2D
 {
+	[Signal] public delegate void OnHitEventHandler();
+
 	[Export] private Balloon target;
 	[Export] private float speed = 100;
 	[Export] private float accel = 200;
@@ -21,6 +23,7 @@ public partial class Bird : CharacterBody2D
 
 	public void Hit()
 	{
+		EmitSignal(SignalName.OnHit);
 		if (--health <= 0) {
 			QueueFree();
 		}
