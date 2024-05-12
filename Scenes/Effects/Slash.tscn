@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://bih5givnor4x0"]
+
+[ext_resource type="Texture2D" uid="uid://dtvaepsiyw0i6" path="res://Sprites/BirdAttack/slash4.png" id="1_vf05f"]
+[ext_resource type="Texture2D" uid="uid://b8bhkbtmmhw03" path="res://Sprites/BirdAttack/slash1.png" id="2_ost0d"]
+[ext_resource type="Script" path="res://Scripts/Slash.cs" id="2_vno7s"]
+[ext_resource type="Texture2D" uid="uid://bb6eey1duf0hc" path="res://Sprites/BirdAttack/slash2.png" id="3_dje4r"]
+[ext_resource type="Texture2D" uid="uid://d0tibmq56re4a" path="res://Sprites/BirdAttack/slash3.png" id="4_alb1r"]
+
+[sub_resource type="Animation" id="Animation_cjtve"]
+resource_name = "slash"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_ost0d"), ExtResource("3_dje4r"), ExtResource("4_alb1r"), ExtResource("1_vf05f")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_41k4c"]
+_data = {
+"slash": SubResource("Animation_cjtve")
+}
+
+[node name="Slash" type="Sprite2D" node_paths=PackedStringArray("anim")]
+z_index = 5
+position = Vector2(-8, 4)
+texture = ExtResource("2_ost0d")
+script = ExtResource("2_vno7s")
+anim = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_41k4c")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="queue_free" unbinds=1]

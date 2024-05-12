@@ -17,6 +17,8 @@ public partial class Bird : CharacterBody2D
 
 	[Export] private AnimationPlayer anim;
 
+	[Export] private PackedScene slash;
+
 	public void Hit()
 	{
 		if (--health <= 0) {
@@ -60,6 +62,7 @@ public partial class Bird : CharacterBody2D
 
 		if (now - lastAttack >= attackTime) {
 			--target.health;
+			AddChild(slash.Instantiate());
 			lastAttack = now;
 		}
 	}
