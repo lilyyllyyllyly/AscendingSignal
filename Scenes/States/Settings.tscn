@@ -73,9 +73,9 @@ text = "
 [node name="Label" type="Label" parent="CanvasLayer/Control/FullScreen"]
 layout_mode = 0
 offset_left = 22.0
-offset_top = -7.0
+offset_top = -5.0
 offset_right = 110.0
-offset_bottom = 17.0
+offset_bottom = 19.0
 theme = ExtResource("2_csq4p")
 text = "Fullscreen"
 
@@ -92,9 +92,9 @@ text = "
 [node name="Label" type="Label" parent="CanvasLayer/Control/Shake"]
 layout_mode = 0
 offset_left = 22.0
-offset_top = -7.0
-offset_right = 110.0
-offset_bottom = 17.0
+offset_top = -5.0
+offset_right = 138.0
+offset_bottom = 19.0
 theme = ExtResource("2_csq4p")
 text = "Screen Shake"
 
