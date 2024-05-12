@@ -149,3 +149,5 @@ stream = ExtResource("7_aoocm")
 volume_db = -5.0
 script = ExtResource("8_xbnyy")
 pitchRange = 0.3
+
+[connection signal="TakeHit" from="Balloon" to="HitSound" method="PlayAudio"]
