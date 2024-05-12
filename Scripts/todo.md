@@ -1,10 +1,9 @@
 ## Gameplay
-- Tweak variables one last time (the game is too hard rn)
 - Endless mode?
-- Saves (if endless)
 - The movement feels terrible, add stuff like coyote time and buffering jump before hitting the floor
 - Rocks that come from the side? (probably not)
 - More enemies (probably not)
+- ~~Saves (if endless)~~
 - ~~(maybe not needed) Falling rocks/something to stop the player from just standing in the same balloon the whole game~~
 - ~~Make the game end after a timer/keep track of time alive (we can have an endless mode option too maybe)~~
 - ~~SPEED UP BIRD SPAWN/SPAWN MORE BIRDS OVER TIME!! (maybe on each bar of signal gained?)~~
@@ -40,7 +39,7 @@
 
 ## Screens
 - Make existing menus nicer
-- Add controls to main menu
+- ~~Add controls to main menu~~
 - ~~Menu~~
 - ~~Be able to restart/go back to menu on death/win~~
 - ~~Pause~~
@@ -48,5 +47,5 @@
 - ~~Lose~~
 
 - ~~Make Menu presentable.~~
-- Add options menu with credits.
+- ~~Add options menu with credits.~~
 
