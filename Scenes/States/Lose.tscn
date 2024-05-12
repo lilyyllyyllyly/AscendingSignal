@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://3s1ssu1f5sdg"]
 
 [ext_resource type="LabelSettings" uid="uid://bv2lp334cqmwh" path="res://Sprites/Themes/BaseFont.tres" id="1_fqdad"]
-[ext_resource type="Theme" uid="uid://bwwwn1t7xj6x8" path="res://Sprites/Themes/BaseTheme.tres" id="2_7jwk0"]
+[ext_resource type="Theme" path="res://Sprites/Themes/BaseTheme.tres" id="1_sunvn"]
 [ext_resource type="Script" path="res://Scripts/SceneChanger.cs" id="3_guk8j"]
 [ext_resource type="AudioStream" uid="uid://dhjkf0w43k5du" path="res://Sounds/lose.wav" id="4_jxrqy"]
 
@@ -16,6 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_sunvn")
 metadata/_edit_use_anchors_ = true
 
 [node name="Lose" type="Label" parent="UIView/UI"]
@@ -31,6 +32,7 @@ offset_right = 21.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_sunvn")
 text = "Lose."
 label_settings = ExtResource("1_fqdad")
 
@@ -40,7 +42,7 @@ offset_left = 342.0
 offset_top = 188.0
 offset_right = 392.0
 offset_bottom = 219.0
-theme = ExtResource("2_7jwk0")
+theme = ExtResource("1_sunvn")
 text = "Retry"
 
 [node name="SceneChanger" type="Node" parent="UIView/UI/RetryButton"]
@@ -57,7 +59,7 @@ offset_top = -34.0
 offset_right = 96.0
 offset_bottom = -3.0
 grow_vertical = 0
-theme = ExtResource("2_7jwk0")
+theme = ExtResource("1_sunvn")
 text = "Return to menu"
 
 [node name="SceneChanger" type="Node" parent="UIView/UI/MenuButton"]
