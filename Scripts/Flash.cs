@@ -10,6 +10,8 @@ public partial class Flash : Sprite2D
 
 	public void StartFlash()
 	{
+		if (!Saves.WantsFlashing) return;
+
 		Material = flashMaterial;
 		lastFlash = Time.GetTicksMsec();
 	}

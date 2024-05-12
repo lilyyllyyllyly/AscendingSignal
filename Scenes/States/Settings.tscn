@@ -18,9 +18,10 @@ font_size = 10
 font = ExtResource("2_av4w8")
 font_size = 10
 
-[node name="Settings" type="Node2D" node_paths=PackedStringArray("screenShake")]
+[node name="Settings" type="Node2D" node_paths=PackedStringArray("screenShake", "enableFlashing")]
 script = ExtResource("1_a41yy")
 screenShake = NodePath("CanvasLayer/Control/Shake")
+enableFlashing = NodePath("CanvasLayer/Control/Flash")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -77,6 +78,25 @@ offset_right = 138.0
 offset_bottom = 19.0
 theme = ExtResource("2_csq4p")
 text = "Screen Shake"
+
+[node name="Flash" type="CheckBox" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 115.0
+offset_right = 38.0
+offset_bottom = 139.0
+theme = ExtResource("2_csq4p")
+text = "
+"
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Flash"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = -5.0
+offset_right = 138.0
+offset_bottom = 19.0
+theme = ExtResource("2_csq4p")
+text = "Enable Flashing"
 
 [node name="Credits Master" type="Label" parent="CanvasLayer/Control"]
 layout_mode = 0
@@ -143,4 +163,5 @@ script = ExtResource("7_motsv")
 scenePath = "res://Scenes/States/Menu.tscn"
 
 [connection signal="pressed" from="CanvasLayer/Control/Shake" to="." method="ToggleScreenShake"]
+[connection signal="pressed" from="CanvasLayer/Control/Flash" to="." method="ToggleFlashing"]
 [connection signal="pressed" from="CanvasLayer/Control/MainMenu" to="CanvasLayer/Control/MainMenu/SceneChanger" method="ChangeScene"]
