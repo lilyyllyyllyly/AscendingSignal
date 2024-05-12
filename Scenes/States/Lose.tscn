@@ -1,9 +1,48 @@
-[gd_scene load_steps=5 format=3 uid="uid://3s1ssu1f5sdg"]
+[gd_scene load_steps=10 format=3 uid="uid://3s1ssu1f5sdg"]
 
-[ext_resource type="LabelSettings" uid="uid://bv2lp334cqmwh" path="res://Sprites/Themes/BaseFont.tres" id="1_fqdad"]
 [ext_resource type="Theme" uid="uid://bwwwn1t7xj6x8" path="res://Sprites/Themes/BaseTheme.tres" id="1_sunvn"]
 [ext_resource type="Script" path="res://Scripts/SceneChanger.cs" id="3_guk8j"]
+[ext_resource type="Texture2D" uid="uid://434ljf1hjx1s" path="res://Sprites/bg.png" id="4_hbfve"]
 [ext_resource type="AudioStream" uid="uid://dhjkf0w43k5du" path="res://Sounds/lose.wav" id="4_jxrqy"]
+[ext_resource type="Texture2D" uid="uid://bwdh2qp2uula3" path="res://Sprites/cat-parachute.png" id="5_crjxe"]
+[ext_resource type="Script" path="res://Scripts/PlayerProp.cs" id="6_txbh2"]
+
+[sub_resource type="Animation" id="Animation_ml3ky"]
+resource_name = "Fall"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(206, -44), Vector2(206, 257.35)]
+}
+
+[sub_resource type="Animation" id="Animation_ech77"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(206, -44)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cg6cj"]
+_data = {
+"Fall": SubResource("Animation_ml3ky"),
+"RESET": SubResource("Animation_ech77")
+}
 
 [node name="Lose" type="Node2D"]
 
@@ -19,29 +58,12 @@ grow_vertical = 2
 theme = ExtResource("1_sunvn")
 metadata/_edit_use_anchors_ = true
 
-[node name="Lose" type="Label" parent="UIView/UI"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -21.0
-offset_top = -12.0
-offset_right = 21.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_sunvn")
-text = "Lose."
-label_settings = ExtResource("1_fqdad")
-
 [node name="RetryButton" type="Button" parent="UIView/UI"]
 layout_mode = 0
-offset_left = 342.0
-offset_top = 188.0
-offset_right = 392.0
-offset_bottom = 219.0
+offset_left = 39.0
+offset_top = 23.0
+offset_right = 89.0
+offset_bottom = 54.0
 theme = ExtResource("1_sunvn")
 text = "Retry"
 
@@ -54,10 +76,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = -34.0
-offset_right = 96.0
-offset_bottom = -3.0
+offset_left = 3.0
+offset_top = -232.0
+offset_right = 139.0
+offset_bottom = -201.0
 grow_vertical = 0
 theme = ExtResource("1_sunvn")
 text = "Return to menu"
@@ -66,10 +88,48 @@ text = "Return to menu"
 script = ExtResource("3_guk8j")
 scenePath = "res://Scenes/States/Menu.tscn"
 
+[node name="Header" type="Label" parent="UIView/UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -164.0
+offset_top = 34.0
+offset_right = -90.0
+offset_bottom = 58.0
+grow_horizontal = 0
+text = "You fell.
+"
+
+[node name="Label" type="Label" parent="UIView/UI/Header"]
+layout_mode = 0
+offset_left = -67.0
+offset_top = 28.0
+offset_right = 147.0
+offset_bottom = 52.0
+text = "Time to go parachuting..."
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_jxrqy")
 volume_db = -5.0
 autoplay = true
+
+[node name="BackDrop" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.443137)
+z_index = -10
+texture = ExtResource("4_hbfve")
+centered = false
+
+[node name="PlayerProp" type="Sprite2D" parent="."]
+position = Vector2(206, -44)
+scale = Vector2(2, 2)
+texture = ExtResource("5_crjxe")
+script = ExtResource("6_txbh2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerProp"]
+libraries = {
+"": SubResource("AnimationLibrary_cg6cj")
+}
 
 [connection signal="pressed" from="UIView/UI/RetryButton" to="UIView/UI/RetryButton/SceneChanger" method="ChangeScene"]
 [connection signal="pressed" from="UIView/UI/MenuButton" to="UIView/UI/MenuButton/SceneChanger" method="ChangeScene"]
