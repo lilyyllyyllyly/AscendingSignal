@@ -35,9 +35,10 @@
 - Music (i literally dont know how we would get music)
 
 ## Screens
-- Be able to restart/go back to menu on death/win
-- Menu
 - Make existing menus nicer
+- Add controls to main menu
+- ~~Menu~~
+- ~~Be able to restart/go back to menu on death/win~~
 - ~~Pause~~
 - ~~Win~~
 - ~~Lose~~
